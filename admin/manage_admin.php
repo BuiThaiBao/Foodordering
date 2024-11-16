@@ -57,9 +57,9 @@ if (isset($_SESSION['change-pwd'])) {
                         <td><?php echo $address ?></td>
                         <td><?php echo $contact ?></td>
                         <td>
-                            <a href="<?php echo SITEURL; ?>/admin/update_password.php?id=<?php echo $id; ?>">Change Password</a>
-                            <a href="<?php echo SITEURL; ?>/admin/update_admin.php?id=<?php echo $id ?>">Update</a>
-                            <a href="<?php echo SITEURL; ?>/admin/delete_admin.php?id=<?php echo $id; ?>">Delete</a>
+                            <a href="<?php echo SITEURL; ?>/admin/update_password.php?id=<?php echo $id; ?>">Đổi mật khẩu</a>
+                            <a href="<?php echo SITEURL; ?>/admin/update_admin.php?id=<?php echo $id ?>">Cập nhật</a>
+                            <a href="<?php echo SITEURL; ?>/admin/delete_admin.php?id=<?php echo $id; ?>" onclick="return confirmDelete();">Xóa</a>
                         </td>
                     </tr>
 
@@ -72,6 +72,12 @@ if (isset($_SESSION['change-pwd'])) {
         ?>
     </table>
 </div>
+<script>
+    function confirmDelete() {
+        return confirm("Bạn có chắc chắn muốn xóa nhân viên này không?");
+    }
+</script>
+
 <?php
 include("partials/footer.php");
 ?>
