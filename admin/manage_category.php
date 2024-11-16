@@ -38,9 +38,9 @@ include("partials/header.php");
         <a href="<?php echo SITEURL; ?>admin/add_category.php">Thêm danh mục</a>
 
         <br /> <br /> <br />
-        <table>
+        <table border=1>
             <tr>
-                <th>S.N.</th>
+                <th>Stt</th>
                 <th>Tên danh mục</th>
                 <th>Image</th>
                 <th>Nổi bật</th>
@@ -56,7 +56,7 @@ include("partials/header.php");
 
             $count = mysqli_num_rows($res);
 
-            $sn = 1;
+            $stt = 1;
 
 
             if ($count > 0) {
@@ -70,7 +70,7 @@ include("partials/header.php");
 
             ?>
                     <tr>
-                        <td><?php echo $sn++ ?></td>
+                        <td><?php echo $stt++ ?></td>
                         <td><?php echo $title; ?></td>
 
                         <td>
@@ -92,8 +92,8 @@ include("partials/header.php");
                         <td><?php echo $featured; ?></td>
                         <td><?php echo $active; ?></td>
                         <td>
-                            <a href="<?php echo SITEURL; ?>admin/update_category.php?id=<?php echo $id; ?>">Update</a>
-                            <a href="<?php echo SITEURL; ?>admin/delete_category.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>">Delete </a>
+                            <a href="<?php echo SITEURL; ?>admin/update_category.php?id=<?php echo $id; ?>">Cập nhật</a>
+                            <a href="<?php echo SITEURL; ?>admin/delete_category.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" onclick="return confirmDelete();">Xóa</a>
                         </td>
                     </tr>
                 <?php
@@ -122,6 +122,11 @@ include("partials/header.php");
     </div>
 
 </div>
+<script>
+    function confirmDelete() {
+        return confirm("Bạn có chắc chắn muốn xóa danh mục này không?");
+    }
+</script>
 
 <?php
 include("partials/footer.php");
