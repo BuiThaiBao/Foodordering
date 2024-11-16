@@ -10,14 +10,6 @@ if (isset($_SESSION['delete'])) {
     echo $_SESSION['delete'];
     unset($_SESSION['delete']);
 }
-if (isset($_SESSION['old_pass_wrong'])) {
-    echo $_SESSION['old_pass_wrong'];
-    unset($_SESSION['old_pass_wrong']);
-}
-if (isset($_SESSION['pwd-not-match'])) {
-    echo $_SESSION['pwd-not-match'];
-    unset($_SESSION['pwd-not-match']);
-}
 if (isset($_SESSION['change-pwd'])) {
     echo $_SESSION['change-pwd'];
     unset($_SESSION['change-pwd']);
