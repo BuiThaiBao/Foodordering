@@ -41,7 +41,7 @@ include('partials/header.php');
                         <?php
                         if ($old_image != "") {
                         ?>
-                            <img src="<?php echo SITEURL; ?>images/categories/<?php echo $old_image ?>" width="150px">
+                            <img src="<?php echo SITEURL; ?>images/category/<?php echo $old_image ?>" width="150px">
                         <?php
 
                         } else {
@@ -106,7 +106,7 @@ include('partials/header.php');
 
                     $image_name = "Category_" . rand(0000, 9999) . '.' . $ext;
                     $source_path = $_FILES['image']['tmp_name'];
-                    $destination = "../images/categories/" . $image_name;
+                    $destination = "../images/category/" . $image_name;
                     $upload = move_uploaded_file($source_path, $destination);
                     if ($upload == false) {
                         $_SESSION['upload'] = "<div class='error'>Tải lên thất bại</div>";
@@ -116,7 +116,7 @@ include('partials/header.php');
 
                     if ($old_image != "") {
 
-                        $remove_path = "../images/categories/" . $old_image;
+                        $remove_path = "../images/category/" . $old_image;
                         $remove = unlink($remove_path);
                         if ($remove == false) {
                             $_SESSION['fail_remove'] = "<div class='error'>Xóa ảnh thất bại</div>";

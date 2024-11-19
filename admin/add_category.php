@@ -83,7 +83,7 @@
 
                     $source_path = $_FILES['image']['tmp_name'];
 
-                    $destination = "../images/categories/" . $image_name;
+                    $destination = "../images/category/" . $image_name;
 
 
                     $upload = move_uploaded_file($source_path, $destination);

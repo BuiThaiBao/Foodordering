@@ -4,7 +4,7 @@ if (isset($_GET['id']) and isset($_GET['image_name'])) {
     $id = $_GET['id'];
     $image_name = $_GET['image_name'];
     if ($image_name != "") {
-        $remove_path = "../images/categories/" . $image_name;
+        $remove_path = "../images/category/" . $image_name;
         $remove = unlink($remove_path);
         if ($remove == false) {
             $_SESSION['remove'] = "<div class='error'>Xóa ảnh thất bại</div>";
