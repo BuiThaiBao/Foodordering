@@ -11,7 +11,11 @@
 
     <!-- Link Bootstrap CSS -->
     <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="asset/style.css?v=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="asset/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -47,7 +51,7 @@
                             <a href="view_cart.php" class="nav-link">Giỏ Hàng</a>
                         </li>
                         <li class="nav-item">
-                            <a href="myorders.php" class="nav-link">Lịch sử</a>
+                            <a href="myorders.php" class="nav-link">Đơn hàng</a>
                         </li>
                         <li class="nav-item">
                             <a href="logout.php" class="nav-link">Logout</a>

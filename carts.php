@@ -1,28 +1,29 @@
 <?php
 include('partials-front/menu.php');
 
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
 if (!isset($_SESSION['u_id'])) {
-    // Redirect to the login page if the user is not logged in
-    header("Location: login.php");
+    echo json_encode(['status' => 'error', 'message' => 'User not logged in']);
     exit;
 }
+
 if (isset($_POST['food_id']) && isset($_POST['quantity'])) {
     $food_id = $_POST['food_id'];
-    $quantity = intval($_POST['quantity']); // Lấy số lượng từ form và chuyển thành số nguyên
+    $quantity = intval($_POST['quantity']); // Chuyển đổi số lượng sang số nguyên
 
     // Kiểm tra nếu giỏ hàng chưa có sản phẩm, tạo mới
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = array();
     }
 
-    // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ hàng thì tăng số lượng, nếu chưa thì thêm mới
+    // Thêm sản phẩm vào giỏ hàng
     if (isset($_SESSION['cart'][$food_id])) {
         $_SESSION['cart'][$food_id]['quantity'] += $quantity;
     } else {
         $_SESSION['cart'][$food_id] = array('quantity' => $quantity);
     }
-    $_SESSION['add_cart_success'] = "<div class='success'>Thêm vào giỏ thành công</div>";
-    // Phản hồi thành công hoặc chuyển hướng người dùng nếu cần
-    header('Location: ' . $_SERVER['HTTP_REFERER']); // Quay lại trang hiện tại sau khi thêm vào giỏ hàng
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }
+?>

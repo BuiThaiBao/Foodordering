@@ -1,97 +1,64 @@
-<?php include('partials-front/menu.php'); ?>
+<?php
+include('partials-front/menu.php'); 
 
-<div class="main-content">
-    <div class="wrapper">
-        <h1 class="text-center">Order Details</h1>
+// Lấy ID người dùng hiện tại
+$u_id = $_SESSION['u_id'];
 
-                <br /><br /><br />
-                <br><br>
-                <center>
-                <table class="content-table">
-                    <tr>
-                        <th>S.N. </th>
-                        <th>Food </th>
-                        <th>Price </th>
-                        <th>Qty. </th>
-                        <th>Total </th>
-                        <th>Order Date </th>
-                        <th>Status </th>
-                    </tr>
-<hr>
-                    <?php 
-                        //Get all the orders from database
-                        $sql = "SELECT * FROM tbl_order WHERE u_id={$_SESSION['u_id']} ORDER BY id DESC"; // DIsplay the Latest Order at First
-                        //Execute Query
-                        $res = mysqli_query($conn, $sql);
-                        //Count the Rows
-                        $count = mysqli_num_rows($res);
+// Lấy thông tin đơn hàng của người dùng
+$sql = "SELECT * FROM tbl_order WHERE u_id = $u_id";
+$res = mysqli_query($conn, $sql);
+if (isset($_SESSION['success'])) {
+    echo $_SESSION['success'];
+    unset($_SESSION['success']);
+}
+if (isset($_SESSION['error'])) {
+    echo $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+?>
 
-                        $sn = 1; //Create a Serial Number and set its initail value as 1
-                     
-                        if($count>0)
-                        {
-                            //Order Available
-                            while($row=mysqli_fetch_assoc($res))
-                            {
-                                //Get all the order details
-                                $id = $row['id'];
-                                $food = $row['food'];
-                                $price = $row['price'];
-                                $qty = $row['qty'];
-                                $total = $row['total'];
-                                $order_date = $row['order_date'];
-                                $status = $row['status'];
+<h2>Danh sách đơn hàng của bạn</h2>
+<table class="table">
+    <tr>
+        <th>STT</th>
+        <th>Mã đơn hàng</th>
+        <th>Ngày đặt</th>
+        <th>Tổng số tiền</th>
+        <th>Phương thức thanh toán</th>
+        <th>Tình trạng</th>
+        <th>Chi tiết</th>
+        <th>Hành động</th>
+    </tr>
 
-                                ?>
+<?php
+$stt = 1;
+while ($row = mysqli_fetch_assoc($res)) {
+    $status = ($row['status'] == 0) ? 'Đã nhận hàng' : (($row['status'] == 1) ? 'Đang đặt hàng' : 'Đã hủy');
+    $payment_method_id = $row['payment_method'];
 
-                                    <tr>
-                                        <td><?php echo $sn++; ?>. </td>
-                                        <td><?php echo $food; ?></td>
-                                        <td><?php echo $price; ?></td>
-                                        <td><?php echo $qty; ?></td>
-                                        <td><?php echo $total; ?></td>
-                                        <td><?php echo $order_date; ?></td>
+    // Lấy tên phương thức thanh toán từ tbl_payment
+    $payment_sql = "SELECT pm_name FROM tbl_payment WHERE pm_id = $payment_method_id";
+    $payment_res = mysqli_query($conn, $payment_sql);
+    $payment_row = mysqli_fetch_assoc($payment_res);
+    $payment_name = $payment_row['pm_name'];
+?>
 
-                                        <td>
-                                            <?php 
-                                                // Ordered, On Delivery, Delivered, Cancelled
+    <tr>
+        <td><?= $stt++ ?></td>
+        <td><?= $row['id'] ?></td>
+        <td><?= $row['order_date'] ?></td>
+        <td><?= number_format($row['total_amount'], 0, ',', '.') ?> VNĐ</td>
+        <td><?= $payment_name ?></td>
+        <td><?= $status ?></td>
+        <td>
+            <a href="order_details.php?order_id=<?= $row['id'] ?>" class="btn btn-primary">Xem chi tiết</a>
+        </td>
+        <td>
+            <a href="cancel_order.php?order_id=<?= $row['id'] ?>" class="btn btn-danger">Hủy đơn hàng</a>
+        </td>
+    </tr>
+<?php
+}
+?>
 
-                                                if($status=="Ordered")
-                                                {
-                                                    echo "<label>$status</label>";
-                                                }
-                                                elseif($status=="On Delivery")
-                                                {
-                                                    echo "<label style='color: orange;'>$status</label>";
-                                                }
-                                                elseif($status=="Delivered")
-                                                {
-                                                    echo "<label style='color: green;'>$status</label>";
-                                                }
-                                                elseif($status=="Cancelled")
-                                                {
-                                                    echo "<label style='color: red;'>$status</label>";
-                                                }
-                                            ?>
-                                        </td>
-                                    </tr>
-
-                                <?php
-
-                            }
-                        }
-                        else
-                        {
-                            //Order not Available
-                            echo "<tr><td colspan='12' class='error'>You have not placed any orders yet!!!</td></tr>";
-                        }
-                    ?>
-
- 
-                </table>
-                </center>
-    </div>
-    
-</div>
-
-<?php include('partials-front/footer.php'); ?>
+</table>

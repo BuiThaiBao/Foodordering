@@ -197,17 +197,17 @@ include("partials/header.php");
                     $count = mysqli_num_rows($res);
                     $stt = 1;
 
-                    if ($count > 0) {
-                        while ($row = mysqli_fetch_assoc($res)) {
-                            $id = $row['id'];
-                            $title = $row['food_title'];
-                            $category_title = $row['category_title'];
-                            $description = $row['description'];
-                            $price = $row['price'];
-                            $image_name = $row['image_name'];
-                            $featured = $row['featured'];
-                            $active = $row['active'];
-                    ?>
+                        if ($count > 0) {
+                            while ($row = mysqli_fetch_assoc($res)) {
+                                $id = $row['id'];
+                                $title = $row['food_title'];
+                                $category_title = $row['category_title'];
+                                $description = $row['description'];
+                                $price = $row['price'];
+                                $image_name = $row['image_name'];
+                                $featured = $row['featured'];
+                                $active = $row['active'];
+                        ?>
                             <tr>
                                 <td><?php echo $stt++; ?></td>
                                 <td><?php echo $title; ?></td>

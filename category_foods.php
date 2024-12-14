@@ -25,20 +25,22 @@ if (isset($_GET['category_id'])) {
 <!-- Food Search Section Starts Here -->
 <section class="food-search text-center py-5 bg-light">
     <div class="container">
-        <h2 class="display-4">Explore Foods in <span class="text-primary">"<?php echo $category_title; ?>"</span></h2>
+        <h2 class="display-4"><span class="text-primary-food"><?php echo $category_title; ?></span></h2>
     </div>
 </section>
 <!-- Food Search Section Ends Here -->
 
 <!-- Food Menu Section Starts Here -->
-<section class="food-menu py-5">
+<section class="food-menu section">
     <div class="container">
-        <h2 class="text-center mb-4">Food Menu</h2>
+        <h2 class="section-title">Món ăn</h2>
 
-        <div class="row">
+        <div class="food-menu-grid">
             <?php
-            // Create SQL Query to Get foods based on Selected Category
-            $sql2 = "SELECT * FROM tbl_food WHERE category_id=$category_id";
+            $limit = 12;
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $offset = ($page - 1) * $limit;
+            $sql2 = "SELECT * FROM tbl_food WHERE category_id=$category_id LIMIT $limit OFFSET $offset";
 
             // Execute the Query
             $res2 = mysqli_query($conn, $sql2);
@@ -56,49 +58,57 @@ if (isset($_GET['category_id'])) {
                     $description = $row2['description'];
                     $image_name = $row2['image_name'];
             ?>
-                    <!-- Food Menu Item -->
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card shadow-sm border-0">
-                            <?php
-                            if ($image_name == "") {
-                                // Image not Available
-                                echo "<div class='error p-3 text-center'>Image not Available</div>";
-                            } else {
-                                // Image Available
-                            ?>
-                                <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" class="card-img-top" alt="<?php echo $title; ?>">
-                            <?php
-                            }
-                            ?>
-
-                            <div class="card-body text-center">
-                                <h5 class="card-title"><?php echo $title; ?></h5>
-                                <p class="card-text"><?php echo $description; ?></p>
-                                <p class="food-price text-success"><?php echo $price; ?> VND</p>
-                                <div class="d-flex justify-content-center">
-                                    <form action="<?php echo SITEURL; ?>carts.php?food_id=<?php echo $id; ?>" method="POST" class="mt-2">
-                                        <input type="hidden" name="food_id" value="<?php echo $id; ?>">
-                                        <div class="food_add_qty d-flex align-items-center">
-                                            <label for="quantity" class="me-2">Quantity:</label>
-                                            <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control w-25">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary mt-2 w-100">Add to Cart</button>
-                                    </form>
-
-                                </div>
+                    <a href="<?php echo SITEURL; ?>food_detail_show.php?food_id=<?php echo $id; ?>" class="food-item-link"> <!-- Start of the link -->
+                        <div class="food-item">
+                            <div class="food-image-wrapper">
+                                <?php if ($image_name != "") { ?>
+                                    <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="food-image">
+                                <?php } else { ?>
+                                    <div class="error">Image not available.</div>
+                                <?php } ?>
+                            </div>
+                            <div class="food-details">
+                                <h4 class="food-title"><?php echo $title; ?></h4>
+                                <p class="food-price"><?php echo $price; ?> VND</p>
+                                <p class="food-description"><?php echo $description; ?></p>
+                                <form action="<?php echo SITEURL; ?>carts.php?food_id=<?php echo $id; ?>" method="POST" class="add-to-cart-form">
+                                    <input type="hidden" name="food_id" value="<?php echo $id; ?>">
+                                    <label for="quantity-<?php echo $id; ?>">Số lượng:</label>
+                                    <input type="number" name="quantity" id="quantity-<?php echo $id; ?>" value="1" min="1" class="quantity-input">
+                                    <button type="submit" class="btn btn-add-to-cart">Thêm vào giỏ</button>
+                                </form>
                             </div>
                         </div>
-                    </div>
+                    </a>
             <?php
                 }
             } else {
-                // Food not available
-                echo "<div class='error text-center'>Food not Available.</div>";
+                // Food not Available
+                echo "<div class='error'>Food not found.</div>";
             }
             ?>
 
         </div>
         <div class="clearfix"></div>
+        <div class="pagination">
+            <?php
+            // Get total number of products
+            $total_sql = "SELECT COUNT(*) as total FROM tbl_food WHERE category_id=$category_id";
+            $total_res = mysqli_query($conn, $total_sql);
+            $total_row = mysqli_fetch_assoc($total_res);
+            $total_products = $total_row['total'];
+            $total_pages = ceil($total_products / $limit); // Calculate total pages
+
+            // Display pagination links
+            for ($i = 1; $i <= $total_pages; $i++) {
+                if ($i == $page) {
+                    echo "<span class='page-number active'>$i</span> "; // Current page
+                } else {
+                    echo "<a href='?page=$i' class='page-number'>$i</a> "; // Other pages
+                }
+            }
+            ?>
+        </div>
     </div>
 </section>
 <!-- Food Menu Section Ends Here -->

@@ -1,11 +1,8 @@
 <?php
 include('partials-front/menu.php');
-// Kết nối cơ sở dữ liệu
 ?>
 <html>
 <style>
-    /* Styles similar to your original code */
-    /* Adjust or add styles here if needed */
     .cart-container {
         width: 80%;
         margin: 0 auto;
@@ -139,85 +136,117 @@ include('partials-front/menu.php');
 </style>
 
 <h2>Giỏ hàng của bạn</h2>
-
-<div class="cart-container">
-    <?php
-    // Kiểm tra nếu giỏ hàng không rỗng
-    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-        echo "<table class='table'>
+<form action="payment.php" method="post">
+    <div class="cart-container">
+        <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) { ?>
+            <table class='table'>
                 <tr>
                     <th>Sản phẩm</th>
+                    <th>Hình ảnh</th>
                     <th>Giá</th>
                     <th>Số lượng</th>
                     <th>Size</th>
                     <th>Tổng</th>
+                    <th>Ghi chú</th>
                     <th>Thao tác</th>
-                </tr>";
+                </tr>
 
-        $total_price = 0;
+                <?php $total_price = 0;
+                foreach ($_SESSION['cart'] as $food_id => $details) {
+                    if (!is_numeric($food_id)) continue;
+                    $stmt = $conn->prepare("SELECT * FROM tbl_food WHERE id = ?");
+                    $stmt->bind_param("i", $food_id);
+                    $stmt->execute();
+                    $res = $stmt->get_result();
 
-        foreach ($_SESSION['cart'] as $food_id => $details) {
-            if (!is_numeric($food_id)) {
-                continue;
-            }
+                    if ($product = $res->fetch_assoc()) {
+                        $title = $product['title'];
+                        $image_name = $product['image_name'];
+                        $price = $product['price'];
+                        $quantity = $details['quantity'];
+                        $size = isset($details['size']) ? $details['size'] : 'S';
+                        $item_total = $price * $quantity;
 
-            // Truy vấn thông tin sản phẩm
-            $stmt = $conn->prepare("SELECT * FROM tbl_food WHERE id = ?");
-            $stmt->bind_param("i", $food_id);
-            $stmt->execute();
-            $res = $stmt->get_result();
+                        if ($size == 'M') $item_total *= 1.10;
+                        elseif ($size == 'L') $item_total *= 1.20; ?>
 
-            if ($product = $res->fetch_assoc()) {
-                $title = $product['title'];
-                $price = $product['price'];
-                $quantity = $details['quantity'];
-                $size = isset($details['size']) ? $details['size'] : 'S'; // Mặc định là 'S'
-                $item_total = $price * $quantity;
+                        <tr>
+                            <td><?= $title ?></td>
+                            <td>
 
-                // Tính giá theo kích thước
-                if ($size == 'M') {
-                    $item_total *= 1.10;  // Tăng 10% cho size M
-                } elseif ($size == 'L') {
-                    $item_total *= 1.20;  // Tăng 20% cho size L
-                }
+                                <?php if ($image_name != "") { ?>
+                                    <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="food-image">
+                                <?php } else { ?>
+                                    <div class="error">Image not available.</div>
+                                <?php } ?>
 
-                echo "<tr>
-                        <td>$title</td>
-                        <td>" . number_format($price, 0, ',', '.') . " VND</td>
-                        <td>
-                            <input type='number' name='quantity[$food_id]' value='$quantity' min='1' style='width: 50px;' onchange='updateQuantity(this, $food_id)'>
-                        </td>
-                        <td>
-                            <select name='size[$food_id]' onchange='updateSize(this, $food_id)'>
-                                <option value='S' " . ($size == 'S' ? 'selected' : '') . ">S</option>
-                                <option value='M' " . ($size == 'M' ? 'selected' : '') . ">M</option>
-                                <option value='L' " . ($size == 'L' ? 'selected' : '') . ">L</option>
-                            </select>
-                        </td>
-                        <td id='item-total-$food_id'>" . number_format($item_total, 0, ',', '.') . " VND</td>
-                        <td>
-                            <a href='remove_cart.php?food_id=$food_id' class='btn btn-danger'>Xóa</a>
-                        </td>
-                    </tr>";
+                            </td>
+                            <td><?= number_format($price, 0, ',', '.') ?> VND</td>
+                            <td>
+                                <input type='number' name='quantity[<?= $food_id ?>]' value='<?= $quantity ?>' min='1' style='width: 50px;' onchange='updateQuantity(this, <?= $food_id ?>)'>
+                            </td>
+                            <td>
+                                <select name='size[<?= $food_id ?>]' onchange='updateSize(this, <?= $food_id ?>)'>
+                                    <option value='S' <?= ($size == 'S' ? 'selected' : '') ?>>S</option>
+                                    <option value='M' <?= ($size == 'M' ? 'selected' : '') ?>>M</option>
+                                    <option value='L' <?= ($size == 'L' ? 'selected' : '') ?>>L</option>
+                                </select>
+                            </td>
+                            <td id='item-total-<?= $food_id ?>'><?= number_format($item_total, 0, ',', '.') ?> VND</td>
+                            <td>
+                                <textarea name="note" cols="30" rows="5" placeholder="Ghi chú cho cửa hàng"></textarea>
+                            </td>
+                            <td>
+                                <a href='remove_cart.php?food_id=<?= $food_id ?>' class='btn btn-danger'>Xóa</a>
+                            </td>
+                        </tr>
 
-                $total_price += $item_total;
-            }
-            $stmt->close();
-        }
+                        <?php $total_price += $item_total; ?>
+                    <?php } ?>
+                    <?php $stmt->close(); ?>
+                <?php } ?>
 
-        echo "<tr>
-                <td colspan='4'><strong>Tổng cộng</strong></td>
-                <td id='total-price'><strong>" . number_format($total_price, 0, ',', '.') . " VND</strong></td>
-                <td></td>
-              </tr>";
-        echo "</table>";
-        echo "<button class='btn btn-primary' onclick='location.reload();'>Cập nhật giỏ hàng</button>";
-        echo "<a href='checkout.php' class='btn btn-success'>Thanh toán</a>";
-    } else {
-        echo "<p>Giỏ hàng của bạn đang trống.</p>";
-    }
-    ?>
-</div>
+                <?php foreach ($_SESSION['cart'] as $food_id => $details) { ?>
+                    <input type="hidden" name="cart[<?= $food_id ?>][quantity]" value="<?= $details['quantity'] ?>">
+                    <input type="hidden" name="cart[<?= $food_id ?>][size]" value="<?= (isset($details['size']) ? $details['size'] : 'S') ?>">
+                <?php } ?>
+
+                <tr>
+                    <td colspan='4'><strong>Tổng cộng</strong></td>
+                    <td id='total-price'><strong><?= number_format($total_price, 0, ',', '.') ?> VND</strong></td>
+                    <td></td>
+                </tr>
+
+
+                <input type="hidden" name="total_price" value="<?= $total_price ?>">
+
+            </table>
+        <?php } else { ?>
+            <p>Giỏ hàng của bạn đang trống.</p>
+        <?php } ?>
+    </div>
+    <input type="hidden">
+    <button type="submit" class="btn btn-success">Đặt hàng</button>
+</form>
+<button class='btn btn-primary' onclick='location.reload();'>Cập nhật giỏ hàng</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>

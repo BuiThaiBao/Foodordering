@@ -63,7 +63,7 @@
 
 <body>
     <?php
-    $u_id = $_SESSION['u_id'];
+    $u_id = $_GET['u_id'];
     $sql = "SELECT * FROM users WHERE id = $u_id";
     $res = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($res);

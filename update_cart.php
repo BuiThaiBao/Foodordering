@@ -49,6 +49,5 @@
         }
         $response['total_price'] = number_format($total_price, 0, ',', '.');
     }
-
     $stmt->close();
     echo json_encode($response);

@@ -1,11 +1,11 @@
 <?php include('partials-front/menu.php'); ?>
 
 <!-- Categories Section Starts Here -->
-<section class="categories py-5">
+<section class="categories-section">
     <div class="container">
-        <h2 class="text-center mb-4">Explore Foods</h2>
+        <h2 class="section-title">Explore Foods</h2>
 
-        <div class="row">
+        <div class="categories-grid ">
             <?php
             // Display all the categories that are active
             // SQL Query
@@ -26,35 +26,23 @@
                     $title = $row['title'];
                     $image_name = $row['image_name'];
             ?>
-
-                    <!-- Category Card -->
-                    <div class="col-md-4 mb-4">
-                        <a href="<?php echo SITEURL; ?>category_foods.php?category_id=<?php echo $id; ?>" class="text-decoration-none">
-                            <div class="card shadow-sm">
-                                <?php
-                                if ($image_name == "") {
-                                    // Image not Available
-                                    echo "<div class='error p-4 text-center'>Image not found.</div>";
-                                } else {
-                                    // Image Available
-                                ?>
-                                    <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" class="card-img-top" alt="<?php echo $title; ?>">
-                                <?php
-                                }
-                                ?>
-
-                                <div class="card-body text-center">
-                                    <h5 class="card-title"><?php echo $title; ?></h5>
-                                </div>
+                    <div class="category-item">
+                        <a href="<?php echo SITEURL; ?>category_foods.php?category_id=<?php echo $id; ?>" class="category-link">
+                            <div class="category-image-wrapper">
+                                <?php if ($image_name != "") { ?>
+                                    <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="category-image">
+                                <?php } else { ?>
+                                    <div class="error">Image not Available</div>
+                                <?php } ?>
                             </div>
+                            <h3 class="category-title"><?php echo $title; ?></h3>
                         </a>
                     </div>
 
             <?php
                 }
             } else {
-                // Categories Not Available
-                echo "<div class='error text-center'>Category not found.</div>";
+                echo "<div class='error text-center'>Category not Added.</div>";
             }
             ?>
         </div>
