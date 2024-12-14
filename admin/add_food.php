@@ -129,7 +129,7 @@ include('partials/header.php')
 
                     $src = $_FILES['image']['tmp_name'];
 
-                    $dst =  "../images/foods/" . $image_name;
+                    $dst =  "../images/food/" . $image_name;
 
                     $upload = move_uploaded_file($src, $dst);
 

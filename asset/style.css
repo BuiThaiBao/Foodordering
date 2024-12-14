@@ -1,0 +1,173 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333; /* Darker text for better readability */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #e74c3c; /* Reddish title color */
+}
+
+.error {
+    color: red;
+    text-align: center; /* Center error messages */
+    padding: 10px;
+}
+.link-to{
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #e74c3c;
+    text-decoration: none;
+}
+.link-to:hover{
+    text-decoration: underline;
+}
+
+/* Categories Section */
+.categories-section {
+    padding: 40px 0;
+    background-color: #f9f9f9; /* Light gray background */
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    grid-gap: 20px;
+}
+
+.category-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden; /* Prevents image overflow */
+    transition: transform 0.2s; /* Smooth hover effect */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.category-item:hover{
+    transform: scale(1.05);
+}
+
+.category-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.category-image-wrapper {
+    height: 200px; /* Fixed height for images */
+    overflow: hidden;
+}
+
+.category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images cover the entire container */
+}
+
+.category-title {
+    padding: 15px;
+    text-align: center;
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Food Menu Section */
+.food-menu-section {
+    padding: 40px 0;
+}
+
+.food-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.food-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+.food-item:hover{
+    transform: scale(1.05);
+}
+
+.food-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.food-image-wrapper {
+    height: 200px;
+    overflow: hidden;
+}
+
+.food-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.food-details {
+    padding: 15px;
+}
+
+.food-title {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.food-price {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.food-description {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.add-to-cart-form {
+    padding: 10px 15px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn-add-to-cart {
+    background-color: #27ae60; /* Green button */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.btn-add-to-cart:hover {
+    background-color: #219653; /* Darker green on hover */
+}
