@@ -1,11 +1,9 @@
-<?php include('partials/header.php')
-?>
+<?php include('partials/header.php'); ?>
 
 <div class="main-content">
     <div class="wrapper">
         <h1>Thêm danh mục</h1>
-        <br>
-        <br>
+        <br><br>
         <?php
         if (isset($_SESSION['add'])) {
             echo $_SESSION['add'];
@@ -17,20 +15,15 @@
         }
         ?>
 
-
         <form action="" method="POST" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td>Tên danh mục: </td>
-                    <td>
-                        <input type="text" name="title" placeholder="Tên danh mục">
-                    </td>
+                    <td><input type="text" name="title" placeholder="Tên danh mục" required></td>
                 </tr>
                 <tr>
                     <td>Tải ảnh lên: </td>
-                    <td>
-                        <input type="file" name="image">
-                    </td>
+                    <td><input type="file" name="image"></td>
                 </tr>
                 <tr>
                     <td>Nổi bật:</td>
@@ -56,66 +49,52 @@
 
         <?php
         if (isset($_POST['submit'])) {
-            $title = $_POST['title'];
-            if (isset($_POST['featured'])) {
-                $featured = $_POST['featured'];
-            } else {
-                $featured = "No";
-            }
-            if (isset($_POST['active'])) {
-                $active = $_POST['active'];
-            } else {
-                $active = "No";
-            }
-            if (isset($_FILES['image']['name'])) {
+            // Sanitize inputs
+            $title = htmlspecialchars($_POST['title']);
+            $featured = isset($_POST['featured']) ? $_POST['featured'] : "No";
+            $active = isset($_POST['active']) ? $_POST['active'] : "No";
 
+            $image_name = "";
+            if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != "") {
                 $image_name = $_FILES['image']['name'];
 
+                // Validate file type
+                $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
+                $ext = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
 
-                if ($image_name != "") {
-
-
-                    //Lấy đuôi ảnh 
-                    $ext = end(explode('.', $image_name));
-
-
+                if (in_array($ext, $allowed_types)) {
                     $image_name = "Category_" . rand(0000, 9999) . '.' . $ext;
-
                     $source_path = $_FILES['image']['tmp_name'];
-
                     $destination = "../images/category/" . $image_name;
 
-
-                    $upload = move_uploaded_file($source_path, $destination);
-
-
-                    if ($upload == false) {
+                    // Move file to the destination
+                    if (!move_uploaded_file($source_path, $destination)) {
                         $_SESSION['upload'] = "<div class='error'>Lỗi tải ảnh lên</div>";
-
                         header('location:' . SITEURL . "admin/add_category.php");
-
                         die();
                     }
+                } else {
+                    $_SESSION['upload'] = "<div class='error'>Định dạng ảnh không hợp lệ</div>";
+                    header('location:' . SITEURL . "admin/add_category.php");
+                    die();
                 }
-            } else {
-                $image_name = "";
             }
-            $sql = "INSERT INTO tbl_category SET 
-            title='$title', 
-            image_name='$image_name',
-            featured='$featured', 
-            active='$active'
-            ";
-            $res = mysqli_query($conn, $sql);
 
+            // Use prepared statements for the SQL query
+            $sql = "INSERT INTO tbl_category (title, image_name, featured, active) VALUES (?, ?, ?, ?)";
+            if ($stmt = mysqli_prepare($conn, $sql)) {
+                mysqli_stmt_bind_param($stmt, "ssss", $title, $image_name, $featured, $active);
 
-            if ($res == true) {
-
-                $_SESSION['add'] = "<div class='success'>Thêm danh mục thành công </div>";
-                header('location:' . SITEURL . 'admin/manage_category.php');
+                if (mysqli_stmt_execute($stmt)) {
+                    $_SESSION['add'] = "<div class='success'>Thêm danh mục thành công</div>";
+                    header('location:' . SITEURL . 'admin/manage_category.php');
+                } else {
+                    $_SESSION['add'] = "<div class='error'>Lỗi thêm danh mục</div>";
+                    header('location:' . SITEURL . 'admin/add_category.php');
+                }
+                mysqli_stmt_close($stmt);
             } else {
-
-                $_SESSION['add'] = "<div class='error'>Lỗi thêm danh mục</div>";
+                $_SESSION['add'] = "<div class='error'>Lỗi chuẩn bị câu lệnh SQL</div>";
                 header('location:' . SITEURL . 'admin/add_category.php');
             }
         }
@@ -123,6 +102,4 @@
     </div>
 </div>
 
-<?php include('partials/footer.php')
-
-?>
+<?php include('partials/footer.php'); ?>

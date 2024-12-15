@@ -107,10 +107,7 @@ include('partials/header.php');
             <br>
             <br>
             <?php
-            if (isset($_SESSION['login'])) {
-                echo '<div class="alert alert-success">' . $_SESSION['login'] . '</div>';
-                unset($_SESSION['login']);
-            }
+           
             ?>
             <div class="row dashboard-stats">
                 <div class="col-4 text-center stat-box">
@@ -146,16 +143,7 @@ include('partials/header.php');
                         <p>Orders</p>
                     </a>
                 </div>
-                <div class="col-4 text-center stat-box">
-                    <?php
-                    $sql4 = "select SUM(total) as Total from tbl_order";
-                    $res4 = mysqli_query($conn, $sql4);
-                    $row4 = mysqli_fetch_assoc($res4);
-                    $total_revenue = $row4['Total'];
-                    ?>
-                    <h1>$<?php echo number_format($total_revenue, 2) ?></h1>
-                    <p>Total Revenue</p>
-                </div>
+             
             </div>
             <div class="clearfix"></div>
         </div>

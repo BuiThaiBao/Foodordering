@@ -54,50 +54,47 @@ include('partials/header.php');
             </tr>
         </table>
     </form>
-
-
-
 </div>
-
 </html>
 <?php
 if (isset($_POST['submit'])) {
+
     $full_name = $_POST['full_name'];
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
-    $cf_password = md5($_POST['cf_password']);
+    $password = $_POST['password'];
+    $cf_password = $_POST['cf_password'];
     $email = $_POST['email'];
     $address = $_POST['address'];
     $contact = $_POST['contact'];
-    if ($password == $cf_password) {
-        $sql = "INSERT INTO tbl_admin SET
-        full_name ='$full_name',
-        username ='$username',
-        password  = '$password',
-        email = '$email',
-        address = '$address',
-        contact = '$contact'
-        ";
+    if ($password === $cf_password) {
+        $hashed_password = md5($password);
+        $sql = "INSERT INTO tbl_admin (full_name, username, password, email, address, contact) VALUES (?, ?, ?, ?, ?, ?)";
+
+        // Sử dụng Prepared Statements để tránh SQL Injection
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            // Gán giá trị vào các placeholder (?)
+            mysqli_stmt_bind_param($stmt, "ssssss", $full_name, $username, $hashed_password, $email, $address, $contact);
+
+            // Thực thi câu lệnh
+            if (mysqli_stmt_execute($stmt)) {
+                $_SESSION['add'] = "<div class='success'>Thêm nhân viên thành công</div>";
+                header('location:' . SITEURL . 'admin/manage_admin.php');
+            } else {
+                $_SESSION['add'] = "<div class='error'>Thêm nhân viên thất bại</div>";
+                header('location:' . SITEURL . 'admin/add_admin.php');
+            }
+
+            // Đóng câu lệnh chuẩn bị
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Lỗi chuẩn bị câu lệnh: " . mysqli_error($conn);
+        }
     } else {
-        echo "Mật khẩu không trùng kh��p";
         $_SESSION['add'] = "<div class='error'>Mật khẩu không trùng khớp</div>";
-        header('location:' . SITEURL . 'admin/add_admin.php');
-    }
-    $res = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    if ($res == true) {
-        $_SESSION['add'] = "<div class='success' >Thêm nhân viên thành công </div>";
-        header('location:' . SITEURL . 'admin/manage_admin.php');
-    } else {
-        echo "Thêm nhâ n viên thất bại";
-        $_SESSION['add'] = "<div class='error'>Thêm nhân viên thất bại</div>";
         header('location:' . SITEURL . 'admin/add_admin.php');
     }
 }
 ?>
-
-
-
-
 <?php
 include('partials/footer.php');
 ?>

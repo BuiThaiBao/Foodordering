@@ -15,7 +15,6 @@ if (isset($_SESSION['order'])) {
     <style>
         /* General Styles */
 
-
 /* Responsive adjustments (if needed) */
 @media (max-width: 768px) {
     .food-menu-grid, .categories-grid {
@@ -35,6 +34,10 @@ if (isset($_SESSION['order'])) {
 
             <div class="categories-grid">
                 <?php
+                if (isset($_SESSION['login'])) {
+                    echo '<div class="alert alert-success">' . $_SESSION['login'] . '</div>';
+                    unset($_SESSION['login']);
+                }
                 $sql = "SELECT * FROM tbl_category WHERE active='Yes' AND featured='Yes' LIMIT 8";
                 $res = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($res);
@@ -85,7 +88,7 @@ if (isset($_SESSION['order'])) {
                         $id = $row['id'];
                         $title = $row['title'];
                         $price = $row['price'];
-                        $description = $row['description'];
+                        
                         $image_name = $row['image_name'];
                 ?>
                         <!-- Start of the link -->
@@ -101,7 +104,7 @@ if (isset($_SESSION['order'])) {
                             <div class="food-details">
                                 <h4 class="food-title"><?php echo $title; ?></h4>
                                 <p class="food-price"><?php echo $price; ?> VND</p>
-                                <p class="food-description"><?php echo $description; ?></p>
+                                
                             </div>
                             </a>
                             <form action="<?php echo SITEURL; ?>carts.php?food_id=<?php echo $id; ?>" method="POST" class="add-to-cart-form">
