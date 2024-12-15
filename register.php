@@ -21,9 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($num == 0) {
         if ($password == $cpassword && $exists == false) {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (username, password, customer_name, customer_email, customer_contact, customer_address, created_at) 
-                    VALUES ('$username', '$hash', '$customer_name', '$customer_email', '$customer_contact', '$customer_address', current_timestamp())";
-
+            $sql = "INSERT INTO users (username, password, customer_name,customer_image, customer_email, customer_contact, customer_address, created_at) 
+                    VALUES ('$username', '$hash', '$customer_name','avt_default.jpg', '$customer_email', '$customer_contact', '$customer_address', current_timestamp())";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {

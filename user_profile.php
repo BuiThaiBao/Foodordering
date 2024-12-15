@@ -72,8 +72,13 @@
         $username = $row['username'];
         $full_name = $row['customer_name'];
         $email = $row['customer_email'];
+        $image = $row['customer_image'];
         $contact = $row['customer_contact'];
         $address = $row['customer_address'];
+    }
+    if (isset($_SESSION['update'])) {
+        echo '<div class="alert alert-success">' . $_SESSION['update'] . '</div>';
+        unset($_SESSION['update']);
     }
     ?>
     <div
@@ -96,7 +101,7 @@
                                 class="card-body">
                                 <div
                                     class="d-flex flex-column align-items-center text-center"> <img
-                                        src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                        src="images/user/<?php echo $image ?>" alt="Admin" class="rounded-circle" width="150">
                                     <div
                                         class="mt-3">
                                         <h4><?php echo $username; ?></h4>
@@ -119,7 +124,7 @@
                                     class="row">
                                     <div
                                         class="col-sm-3">
-                                        <h6 class="mb-0">Full Name</h6>
+                                        <h6 class="mb-0">Họ và tên </h6>
                                     </div>
                                     <div
                                         class="col-sm-9 text-secondary"><?php echo $full_name; ?></div>
@@ -139,7 +144,7 @@
                                     class="row">
                                     <div
                                         class="col-sm-3">
-                                        <h6 class="mb-0">Phone</h6>
+                                        <h6 class="mb-0">Số điện thoạithoại</h6>
                                     </div>
                                     <div
                                         class="col-sm-9 text-secondary"><?php echo $contact; ?></div>
@@ -151,7 +156,7 @@
                                     class="row">
                                     <div
                                         class="col-sm-3">
-                                        <h6 class="mb-0">Address</h6>
+                                        <h6 class="mb-0">Địa chỉ</h6>
                                     </div>
                                     <div
                                         class="col-sm-9 text-secondary"><?php echo $address; ?></div>
@@ -161,7 +166,7 @@
                                     class="row">
                                     <div
                                         class="col-sm-12"> <a
-                                            class="btn btn-info " target="__blank" href="edit_profile.php">Edit</a></div>
+                                            class="btn btn-info " href="edit_profile.php?u_id=<?php echo $u_id ?>">Edit</a></div>
                                 </div>
                             </div>
                         </div>

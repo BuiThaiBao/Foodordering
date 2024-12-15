@@ -1,8 +1,9 @@
 <?php include('config/constants.php');
-print_r($_POST);
+
 $u_id = $_SESSION['u_id'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cart = json_decode($_POST['cart'], true);
+    $note = $_POST['note'];
     $grand_total = $_POST['total_price'];
     $payment_method = $_POST['payment_method'];
     $sql = "INSERT INTO tbl_order SET
@@ -17,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $order_id = $conn->insert_id; 
 
       
-        $sql_order_details = "INSERT INTO tbl_order_details (order_id, food_id,size,quantity, price) VALUES (?, ?, ?, ?,?)";
+        $sql_order_details = "INSERT INTO tbl_order_details (order_id, food_id,size,note,quantity, price,status) VALUES (?, ?, ?, ?,?,?,?)";
         $stmt_details = $conn->prepare($sql_order_details);
 
         foreach ($cart as $food_id => $details) {
@@ -29,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt_food->execute();
             $res_food = $stmt_food->get_result();
             $food = $res_food->fetch_assoc();
+            $status=1;
 
             if ($food) {
                 $price = $food['price'];
@@ -40,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $price *= 1.20; 
                 }
 
-                $stmt_details->bind_param("iisid", $order_id, $food_id, $size, $quantity, $price);
+                $stmt_details->bind_param("iissidi", $order_id, $food_id, $size,$note, $quantity, $price,$status);
                 $stmt_details->execute();
             }
         }

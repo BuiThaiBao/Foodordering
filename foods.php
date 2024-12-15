@@ -27,7 +27,7 @@
                     
                     $id = $row['id'];
                     $title = $row['title'];
-                    $description = $row['description'];
+    
                     $price = $row['price'];
                     $image_name = $row['image_name'];
             ?>
@@ -44,7 +44,7 @@
                             <div class="food-details">
                                 <h4 class="food-title"><?php echo $title; ?></h4>
                                 <p class="food-price"><?php echo $price; ?> VND</p>
-                                <p class="food-description"><?php echo $description; ?></p>
+                                
                             </div>
                             </a>
                             <form action="<?php echo SITEURL; ?>carts.php?food_id=<?php echo $id; ?>" method="POST" class="add-to-cart-form">

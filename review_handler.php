@@ -1,10 +1,5 @@
 <?php
 include 'config/constants.php'; // Ensure this file contains the database connection setup
-
-// Start session
-// Ensure session_start() is called to access session variables
-
-// Check if the user is logged in
 if (!isset($_SESSION['u_id'])) {
     // Redirect to the login page if the user is not logged in
     header("Location: login.php");
@@ -17,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['u_id'];
     $comment = mysqli_real_escape_string($conn, $_POST['comment']);
     $rating = mysqli_real_escape_string($conn, $_POST['rating']);
-    $create_at = date('Y-m-d H:i:s');
+    
 
     // Handle image upload if an image is provided
     if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != "") {
@@ -44,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insert data into the database, with secure handling for SQL injection
     $sql = "INSERT INTO tbl_review (f_id, u_id, comment, rating, create_at, image_name) 
-            VALUES ('$food_id', '$user_id', '$comment', '$rating', '$create_at', '$image_name')";
+            VALUES ('$food_id', '$user_id', '$comment', '$rating',Now(), '$image_name')";
 
     // Execute SQL query and handle potential errors
     $res = mysqli_query($conn, $sql);

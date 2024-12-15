@@ -1,10 +1,9 @@
 <?php
 include('partials-front/menu.php');
-
-
 // Kiểm tra xem người dùng đã đăng nhập chưa
 if (!isset($_SESSION['u_id'])) {
     echo json_encode(['status' => 'error', 'message' => 'User not logged in']);
+    header('Location: ' . SITEURL . 'login.php');
     exit;
 }
 

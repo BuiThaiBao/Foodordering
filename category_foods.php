@@ -22,10 +22,9 @@ if (isset($_GET['category_id'])) {
 }
 ?>
 
-<!-- Food Search Section Starts Here -->
-<section class="food-search text-center py-5 bg-light">
+<section class="food-search text-center py-5 ">
     <div class="container">
-        <h2 class="display-4"><span class="text-primary-food"><?php echo $category_title; ?></span></h2>
+        <h2 class="display-6"><span class="text-primary-food"><?php echo $category_title; ?></span></h2>
     </div>
 </section>
 <!-- Food Search Section Ends Here -->
@@ -58,8 +57,8 @@ if (isset($_GET['category_id'])) {
                     $description = $row2['description'];
                     $image_name = $row2['image_name'];
             ?>
-                    <a href="<?php echo SITEURL; ?>food_detail_show.php?food_id=<?php echo $id; ?>" class="food-item-link"> <!-- Start of the link -->
-                        <div class="food-item">
+                    <div class="food-item">
+                        <a href="<?php echo SITEURL; ?>food_detail_show.php?food_id=<?php echo $id; ?>" class="food-item-link">
                             <div class="food-image-wrapper">
                                 <?php if ($image_name != "") { ?>
                                     <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="food-image">
@@ -70,16 +69,16 @@ if (isset($_GET['category_id'])) {
                             <div class="food-details">
                                 <h4 class="food-title"><?php echo $title; ?></h4>
                                 <p class="food-price"><?php echo $price; ?> VND</p>
-                                <p class="food-description"><?php echo $description; ?></p>
-                                <form action="<?php echo SITEURL; ?>carts.php?food_id=<?php echo $id; ?>" method="POST" class="add-to-cart-form">
+                                
+                            </div>
+                            </a>
+                            <form action="<?php echo SITEURL; ?>carts.php?food_id=<?php echo $id; ?>" method="POST" class="add-to-cart-form">
                                     <input type="hidden" name="food_id" value="<?php echo $id; ?>">
                                     <label for="quantity-<?php echo $id; ?>">Số lượng:</label>
                                     <input type="number" name="quantity" id="quantity-<?php echo $id; ?>" value="1" min="1" class="quantity-input">
                                     <button type="submit" class="btn btn-add-to-cart">Thêm vào giỏ</button>
                                 </form>
-                            </div>
                         </div>
-                    </a>
             <?php
                 }
             } else {

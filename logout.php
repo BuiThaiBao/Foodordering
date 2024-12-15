@@ -1,6 +1,5 @@
 <?php
-// Initialize the session
-session_start();
+include('../config/constants.php');
  
 // Unset all of the session variables
 $_SESSION = array();

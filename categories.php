@@ -3,7 +3,7 @@
 <!-- Categories Section Starts Here -->
 <section class="categories-section">
     <div class="container">
-        <h2 class="section-title">Explore Foods</h2>
+        <h2 class="section-title">Danh mục sản phẩm </h2>
 
         <div class="categories-grid ">
             <?php

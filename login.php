@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             header("location: index.php");
                         } else {
                             // Password is not valid, display a generic error message
-                            $login_err = "Invalid username or password.";
+                            $login_err = "Sai thông tin đăng nhập.";
                         }
                     }
                 } else {
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $login_err = "Invalid username or password.";
                 }
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Có lỗi xảy ra. Vui lòng thử lại!.";
             }
 
             // Close statement
@@ -118,8 +118,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm border-light">
                     <div class="card-body p-4">
-                        <h3 class="text-center mb-4">Login</h3>
-                        <p class="text-center mb-4">Please enter your credentials to login.</p>
+                        <h3 class="text-center mb-4">Đăng nhập</h3>
+                        <p class="text-center mb-4">Vui lòng nhập thông tin đăng nhập.</p>
 
                         <!-- Display error message if any -->
                         <?php if (!empty($login_err)) : ?>
@@ -128,22 +128,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                             <div class="form-group mb-3">
-                                <label for="username">Username</label>
+                                <label for="username">Tên đăng nhập</label>
                                 <input type="text" id="username" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" required>
                                 <div class="invalid-feedback"><?php echo $username_err; ?></div>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="password">Password</label>
+                                <label for="password">Mật khẩu</label>
                                 <input type="password" id="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" required>
                                 <div class="invalid-feedback"><?php echo $password_err; ?></div>
                             </div>
 
                             <div class="form-group mb-3">
-                                <button type="submit" class="btn btn-primary w-100">Login</button>
+                                <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
                             </div>
 
-                            <p class="text-center">Don't have an account? <a href="register.php">Sign up now</a>.</p>
+                            <p class="text-center">Bạn chưa có tài khoản? <a href="register.php">Đăng kí ngay</a>.</p>
                         </form>
                     </div>
                 </div>
