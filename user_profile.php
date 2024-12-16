@@ -1,65 +1,13 @@
 <?php include('partials-front/menu.php'); ?>
 
 <!DOCTYPE html>
-<html
-    lang="en">
+<html lang="en">
 
-<head
-    itemscope="" itemtype="http://schema.org/WebSite">
-    <meta
-        http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title
-        itemprop="name">Preview bootstrap html snippet. profile with data and skills</title>
-    <meta
-        name="description" itemprop="description" content="Preview bootstrap html snippet. profile with data and skills. Copy and paste the html, css and js code for save time, build your app faster and responsive">
-    <meta
-        name="keywords" content="html, css, javascript, themes, templates, code snippets, ui examples, react js, react-native, plagraounds, cards, front-end, profile, invoice, back-end, web-designers, web-developers">
-    <link
-        itemprop="sameAs" href="https://www.facebook.com/bootdey">
-    <link
-        itemprop="sameAs" href="https://x.com/bootdey">
-    <meta
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <meta
-        name="viewport" content="width=device-width">
-    <link
-        rel="shortcut icon" type="image/x-icon" href="/img/bootdey_favicon.ico">
-    <link
-        rel="apple-touch-icon" sizes="135x140" href="/img/bootdey_135x140.png">
-    <link
-        rel="apple-touch-icon" sizes="76x76" href="/img/bootdey_76x76.png">
-    <link
-        rel="canonical" href="https://www.bootdey.com/snippets/view/profile-with-data-and-skills" itemprop="url">
-    <meta
-        property="x:account_id" content="2433978487" />
-    <meta
-        name="x:card" content="summary">
-    <meta
-        name="x:card" content="summary_large_image">
-    <meta
-        name="x:site" content="@bootdey">
-    <meta
-        name="x:creator" content="@bootdey">
-    <meta
-        name="x:title" content="Preview bootstrap html snippet. profile with data and skills">
-    <meta
-        name="x:description" content="Preview bootstrap html snippet. profile with data and skills. Copy and paste the html, css and js code for save time, build your app faster and responsive">
-    <meta
-        name="x:image" content="https://www.bootdey.com/files/SnippetsImages/bootstrap-snippets-1105.png">
-    <meta
-        name="x:url" content="https://www.bootdey.com/snippets/preview/profile-with-data-and-skills">
-    <meta
-        property="og:title" content="Preview bootstrap html snippet. profile with data and skills">
-    <meta
-        property="og:url" content="https://www.bootdey.com/snippets/preview/profile-with-data-and-skills">
-    <meta
-        property="og:image" content="https://www.bootdey.com/files/SnippetsImages/bootstrap-snippets-1105.png">
-    <meta
-        property="og:description" content="Preview bootstrap html snippet. profile with data and skills. Copy and paste the html, css and js code for save time, build your app faster and responsive">
-    <meta
-        name="msvalidate.01" content="23285BE3183727A550D31CAE95A790AB" />
-    <script src="/cache-js/cache-1635427806-97135bbb13d92c11d6b2a92f6a36685a.js" type="text/javascript"></script>
+<head>
+
 </head>
+
+
 
 <body>
     <?php
@@ -81,92 +29,65 @@
         unset($_SESSION['update']);
     }
     ?>
-    <div
-        id="snippetContent">
-        <link
-            rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
-        <div
-            class="container">
-            <div
-                class="main-body">
+        <div class="container">
+            <div class="main-body">
 
-                <div
-                    class="row gutters-sm">
-                    <div
-                        class="col-md-4 mb-3">
-                        <div
-                            class="card">
-                            <div
-                                class="card-body">
-                                <div
-                                    class="d-flex flex-column align-items-center text-center"> <img
-                                        src="images/user/<?php echo $image ?>" alt="Admin" class="rounded-circle" width="150">
-                                    <div
-                                        class="mt-3">
+                <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center"> <img
+                                        src="images/user/<?php echo $image ?>" alt="Admin" class="rounded-circle"
+                                        width="150">
+                                    <div class="mt-3">
                                         <h4><?php echo $username; ?></h4>
-                                        <p
-
-                                            class="btn btn-outline-primary">Message</button>
+                                        <p class="btn btn-outline-primary">Message</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-                    <div
-                        class="col-md-8">
-                        <div
-                            class="card mb-3">
-                            <div
-                                class="card-body">
-                                <div
-                                    class="row">
-                                    <div
-                                        class="col-sm-3">
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
                                         <h6 class="mb-0">Họ và tên </h6>
                                     </div>
-                                    <div
-                                        class="col-sm-9 text-secondary"><?php echo $full_name; ?></div>
+                                    <div class="col-sm-9 text-secondary"><?php echo $full_name; ?></div>
                                 </div>
                                 <hr>
-                                <div
-                                    class="row">
-                                    <div
-                                        class="col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-3">
                                         <h6 class="mb-0">Email</h6>
                                     </div>
-                                    <div
-                                        class="col-sm-9 text-secondary"> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff99968fbf958a94928a97d19e93"><?php echo $email; ?></a></div>
+                                    <div class="col-sm-9 text-secondary"> <a href="/cdn-cgi/l/email-protection"
+                                            class="__cf_email__"
+                                            data-cfemail="ff99968fbf958a94928a97d19e93"><?php echo $email; ?></a></div>
                                 </div>
                                 <hr>
-                                <div
-                                    class="row">
-                                    <div
-                                        class="col-sm-3">
-                                        <h6 class="mb-0">Số điện thoạithoại</h6>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Số điện thoại</h6>
                                     </div>
-                                    <div
-                                        class="col-sm-9 text-secondary"><?php echo $contact; ?></div>
+                                    <div class="col-sm-9 text-secondary"><?php echo $contact; ?></div>
                                 </div>
                                 <hr>
 
                                 <hr>
-                                <div
-                                    class="row">
-                                    <div
-                                        class="col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-3">
                                         <h6 class="mb-0">Địa chỉ</h6>
                                     </div>
-                                    <div
-                                        class="col-sm-9 text-secondary"><?php echo $address; ?></div>
+                                    <div class="col-sm-9 text-secondary"><?php echo $address; ?></div>
                                 </div>
                                 <hr>
-                                <div
-                                    class="row">
-                                    <div
-                                        class="col-sm-12"> <a
-                                            class="btn btn-info " href="edit_profile.php?u_id=<?php echo $u_id ?>">Edit</a></div>
+                                <div class="row">
+                                    <div class="col-sm-12"> <a class="btn btn-info "
+                                            href="edit_profile.php?u_id=<?php echo $u_id ?>">Edit</a></div>
                                 </div>
                             </div>
                         </div>
@@ -174,17 +95,16 @@
                     </div>
                 </div>
             </div>
-        </div>
         <style type="text/css">
             body {
-                margin-top: 20px;
+                
                 color: #1a202c;
                 text-align: left;
                 background-color: #e2e8f0;
             }
 
             .main-body {
-                padding: 15px;
+                padding: 0;
             }
 
             .card {

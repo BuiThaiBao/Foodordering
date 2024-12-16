@@ -707,8 +707,9 @@ progress {
 }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto;
+  
+  max-width: 100px;
+  height: 200p;
 }
 
 .img-thumbnail {
@@ -3977,6 +3978,7 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
   padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+  background-color : #51AA1B;
 }
 .navbar > .container,
 .navbar > .container-fluid,
@@ -8870,7 +8872,8 @@ textarea.form-control-lg {
 
 .bg-body-tertiary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #51AA1B !important;
+  height: 100px;
 }
 
 .bg-opacity-10 {

@@ -1,12 +1,12 @@
 <?php
 include('partials-front/menu.php');
+
 // Kiểm tra xem người dùng đã đăng nhập chưa
 if (!isset($_SESSION['u_id'])) {
     echo json_encode(['status' => 'error', 'message' => 'User not logged in']);
     header('Location: ' . SITEURL . 'login.php');
     exit;
 }
-
 if (isset($_POST['food_id']) && isset($_POST['quantity'])) {
     $food_id = $_POST['food_id'];
     $quantity = intval($_POST['quantity']); // Chuyển đổi số lượng sang số nguyên

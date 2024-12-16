@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
         <input type="hidden" name="total_price" value="<?= $grand_total ?>">
         <div class="form-group">
             <label for="payment_method">Phương thức thanh toán:</label>
-            <select name="payment_method" id="payment_method" class="form-control">
+            <select name="payment_method" id="payment_method" class="form-control" requied> 
                 <?php
                 $sql = "SELECT * FROM tbl_payment";
                 $res = mysqli_query($conn, $sql);
@@ -94,8 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
                 ?>
             </select>     
         </div>
-        <input type="hidden" name="cart" value='<?= json_encode($cart) ?>'>
-         <input type="hidden" name="payment_method" value="<?= $pm_id ?>">
+
         <input type="submit" class="btn btn-success" value="Xác nhận đặt hàng"></input>
     </form>
 <?php
