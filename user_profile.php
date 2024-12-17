@@ -1,5 +1,4 @@
 <?php include('partials-front/menu.php'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

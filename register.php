@@ -21,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($num == 0) {
         if ($password == $cpassword && $exists == false) {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (username, password, customer_name,customer_image, customer_email, customer_contact, customer_address, created_at) 
-                    VALUES ('$username', '$hash', '$customer_name','avt_default.jpg', '$customer_email', '$customer_contact', '$customer_address', current_timestamp())";
+            $sql = "INSERT INTO users (username, password, customer_name, customer_image, customer_email, customer_contact, customer_address, created_at) 
+                    VALUES ('$username', '$hash', '$customer_name', 'avt_default.jpg', '$customer_email', '$customer_contact', '$customer_address', current_timestamp())";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {
@@ -47,22 +47,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css">
     <title>Signup</title>
 </head>
 
 <body>
 
+    <!-- Navbar Section -->
     <section class="navbar navbar-light bg-light">
         <div class="container">
             <div class="logo">
                 <a href="index.php" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive" style="max-height: 50px;">
+                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
                 </a>
             </div>
         </div>
     </section>
 
+    <!-- Success/Error Alerts -->
     <?php
     if ($showAlert) {
         echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -92,29 +93,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     ?>
 
+    <!-- Signup Form Section -->
     <div class="container my-5">
-        <h2 class="text-center">Signup Here</h2>
+        <h2 class="text-center">Đăng kí ngay</h2>
         <form action="" method="post">
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label for="username">Username</label>
+                    <label for="username">Tên đăng nhập</label>
                     <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="customer_name">Full Name</label>
+                    <label for="customer_name">Họ và tên</label>
                     <input type="text" class="form-control" name="customer_name" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label for="password">Password</label>
+                    <label for="password">Mật khẩu</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="cpassword">Confirm Password</label>
+                    <label for="cpassword">Nhập lại mật khẩu</label>
                     <input type="password" class="form-control" id="cpassword" name="cpassword" required>
-                    <small id="emailHelp" class="form-text text-muted">Make sure to type the same password</small>
                 </div>
             </div>
 
@@ -124,26 +125,90 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="email" class="form-control" name="customer_email" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="customer_contact">Phone</label>
+                    <label for="customer_contact">Số điện thoại</label>
                     <input type="number" class="form-control" name="customer_contact" required>
-                    <small id="emailHelp" class="form-text text-muted">Please Enter a valid 10 digit mobile number</small>
                 </div>
             </div>
 
             <div class="form-group mb-3">
-                <label for="customer_address">Address</label>
+                <label for="customer_address">Địa chỉ</label>
                 <textarea class="form-control" name="customer_address" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">SignUp</button>
+            <button type="submit" class="btn btn-primary btn-block">Đăng kí</button>
         </form>
     </div>
+<style>
+    /* General Reset */
+body {
+    background-color: #f8f9fa;
+}
 
-    <!-- Optional JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+/* Navbar Styling */
+.navbar {
+    background-color: #58B747;
+    color: #ffffff;
+}
 
+.logo img {
+    max-height: 50px;
+}
+
+/* Form Section */
+.container {
+    max-width: 900px;
+}
+
+/* Signup Form Section */
+.form-control {
+    border: 1px solid #58B747;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #45A039;
+    box-shadow: 0 0 5px rgba(88, 183, 71, 0.5);
+}
+
+.btn-primary {
+    background-color: #58B747;
+    border-color: #58B747;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #45A039;
+    border-color: #45A039;
+}
+
+/* Success and Error Alert */
+.alert-success {
+    background-color: #d4edda;
+    border-color: #58B747;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #58B747;
+    color: #721c24;
+}
+
+/* Text and Margins */
+h2.text-center {
+    color: #58B747;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-row .col-md-6 {
+        margin-bottom: 15px;
+    }
+}
+
+</style>
 </body>
 
 </html>

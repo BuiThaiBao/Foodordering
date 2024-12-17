@@ -130,6 +130,5 @@ if (isset($_SESSION['order'])) {
         <a class="link-to" style="" href="<?php echo SITEURL; ?>foods.php">Xem thêm món ăn</a>
     </section>
 </body>
-
 </html>
 <?php include('partials-front/footer.php'); ?>

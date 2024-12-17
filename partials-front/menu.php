@@ -111,6 +111,7 @@ include('config/constants.php');
     input[type="search"] {
         -moz-appearance: textfield;
     }
+    
 </style>
 
 <head>
@@ -120,6 +121,7 @@ include('config/constants.php');
     <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="asset/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
@@ -140,8 +142,8 @@ include('config/constants.php');
             <?php else:
                 $u_id = $_SESSION["u_id"];
             ?>
-                <li class="custom-nav-item">
-                    <a href="logout.php" class="custom-nav-link-top">Logout</a>
+                <li class="custom-nav">
+                    <a href="logout.php" class="custom-nav-link-top" style="justify-content: flex-end;"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
                 </li>
             <?php endif; ?>
         </ul>
@@ -184,7 +186,7 @@ include('config/constants.php');
                 </li>
                 <li class="custom-nav-item">
                     <a href="<?php echo SITEURL; ?>user_profile.php?u_id=<?php echo $u_id ?>"
-                        class="custom-nav-link"><i class="fas fa-user-circle"></i>Profile</a>
+                        class="custom-nav-link"><i class="fas fa-user-circle"></i>Thông tin cá nhân</a>
                 </li>
             <?php endif; ?>
         </div>
@@ -195,7 +197,7 @@ include('config/constants.php');
                 <a href="<?php echo SITEURL; ?>" class="custom-nav-link">Trang chủ</a>
             </li>
             <li class="custom-nav-item">
-                <a href="#" class="custom-nav-link">Giới thiệu</a>
+                <a href="introduce.php" class="custom-nav-link">Giới thiệu</a>
             </li>
             <li class="custom-nav-item">
                 <a href="categories.php" class="custom-nav-link">Danh mục</a>
@@ -203,12 +205,10 @@ include('config/constants.php');
             <li class="custom-nav-item">
                 <a href="foods.php" class="custom-nav-link">Sản phẩm</a>
             </li>
-            <li class="custom-nav-item">
-                <a href="#" class="custom-nav-link">Liên hệ</a>
-            </li>
             <li class="custom-nav-item" style="padding-right: 100px;">
-                <a href="#" class="custom-nav-link">Cửa hàng</a>
+                <a href="contact.php" class="custom-nav-link">Liên hệ</a>
             </li>
+           
             
             
         </ul>
