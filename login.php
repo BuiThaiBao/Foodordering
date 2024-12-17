@@ -63,12 +63,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
+<div class="logo">
     <div class="limiter">
         <div class="container-login100">
+       
             <div class="wrap-login100">
                 <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                    <span class="login100-form-title">Sign In</span>
-
+                    <span class="login100-form-title"> <a href="index.php" title="Logo">
+                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive" width="50px">
+                </a>Đăng nhập</span>
                     <!-- Hiển thị thông báo lỗi -->
                     <?php if (!empty($login_err)) : ?>
                         <div class="alert alert-danger text-center mb-4" style="color:red "><?= $login_err ?></div>
