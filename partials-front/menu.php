@@ -39,8 +39,8 @@ include('config/constants.php');
 
     .custom-nav-item {
         justify-content: center;
-        padding-left: 100px;
-        display: inline-block;
+        padding-left:90px;
+        display: flex;
         flex: 1;
         text-align: center;
     }
@@ -151,7 +151,7 @@ include('config/constants.php');
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a href="http://localhost/Doanweb/index.php" class="navbar-brand">
-                <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive" width="50px">
+                <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive" width="75px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -183,6 +183,13 @@ include('config/constants.php');
                     <a href="view_cart.php" class="custom-nav-link">
                         <i class="fas fa-shopping-cart"></i> Giỏ Hàng
                     </a>
+                    
+                </li>
+                <li class="custom-nav-item">
+                    <a href="myorders.php" class="custom-nav-link">
+                        <i class="fa-solid fa-list"></i> Đơn hàng
+                    </a>
+                    
                 </li>
                 <li class="custom-nav-item">
                     <a href="<?php echo SITEURL; ?>user_profile.php?u_id=<?php echo $u_id ?>"

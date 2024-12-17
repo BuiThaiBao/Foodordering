@@ -1,13 +1,4 @@
 <?php include('partials-front/menu.php'); ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-</head>
-
-
-
 <body>
     <?php
     $u_id = $_GET['u_id'];
@@ -37,13 +28,9 @@
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex flex-column align-items-center text-center"> <img
+                                <div class="d-flex flex-column align-items-center text-center" width="400"> <img
                                         src="images/user/<?php echo $image ?>" alt="Admin" class="rounded-circle"
-                                        width="150">
-                                    <div class="mt-3">
-                                        <h4><?php echo $username; ?></h4>
-                                        <p class="btn btn-outline-primary">Message</button>
-                                    </div>
+                                        width="250">
                                 </div>
                             </div>
                         </div>
@@ -85,8 +72,8 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-sm-12"> <a class="btn btn-info "
-                                            href="edit_profile.php?u_id=<?php echo $u_id ?>">Edit</a></div>
+                                    <div class="col-sm-12"><a class="btn btn-primary" 
+                                            href="edit_profile.php?u_id=<?php echo $u_id ?>">Chỉnh sửa</a></div>
                                 </div>
                             </div>
                         </div>
@@ -154,6 +141,11 @@
 
             .shadow-none {
                 box-shadow: none !important;
+            
+            }
+            .btn {
+                background-color:#58B747 !important;
+                border:none
             }
         </style>
         <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -171,5 +163,4 @@
         gtag('config', 'G-F1RTS0P1CD');
     </script>
 </body>
-
-</html>
+<?php include('partials-front/footer.php'); ?>

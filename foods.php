@@ -43,7 +43,7 @@
                             </div>
                             <div class="food-details">
                                 <h4 class="food-title"><?php echo $title; ?></h4>
-                                <p class="food-price"><?php echo $price; ?> VND</p>
+                                <p class="food-price"><?php echo $price; ?><u>đ</u></p>
                                 
                             </div>
                             </a>

@@ -1,6 +1,6 @@
 <?php include('partials-front/menu.php'); ?>
 <div class="breadcrumb">
-    <a href="index.html">Trang chủ</a> > <span>Giới thiệu</span>
+    <a href="index.php">Trang chủ</a> > <span>Giới thiệu</span>
 </div>
 <hr class="divider">
 <div class="about-content text-left">

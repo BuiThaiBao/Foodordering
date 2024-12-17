@@ -41,18 +41,17 @@
         <li><a href="">Trang chủ</a></li>
         <li><a href="categories.php">Danh mục</a></li>
         <li><a href="foods.php">Sản phẩm</a></li>
-        <li><a href="#">Khuyến mãi</a></li>
-        <li><a href="#">Liên hệ</a></li>
-        <li><a href="#">Cửa hàng</a></li>
+        <li><a href="contact.php">Liên hệ</a></li>
+        <li><a href="introduce.php">Cửa hàng</a></li>
       </ul>
     </div>
 
     <!-- Liên hệ thông tin -->
     <div class="footer-contact">
       <h3>Liên hệ</h3>
-      <p><i class="fas fa-envelope"></i> Email: contact@abc.com</p>
-      <p><i class="fas fa-phone-alt"></i> Hotline: +0123456789</p>
-      <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: 123 Đường ABC, Quận 1, TPHCM</p>
+      <p><i class="fas fa-envelope"></i> Email: buithaibao2k4@gmail.com</p>
+      <p><i class="fas fa-phone-alt"></i> Hotline: +(84)904440436</p>
+      <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: 59 Giải Phóng, Đại học Xây Dựng Hà Nội</p>
     </div>
 
 
