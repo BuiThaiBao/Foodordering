@@ -23,6 +23,24 @@ if (isset($_SESSION['order'])) {
             object-fit: cover;
             
         }
+        .banners-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px; /* Khoảng cách giữa hai banner */
+        align-items: center;
+    }
+
+    /* Hiển thị từng banner */
+    .banner-item {
+        flex: 1; /* Chỉ định mỗi banner chiếm một nửa khoảng không gian */
+    }
+    .banner-image-2 {
+        width: 100%;
+        height: auto;
+        max-height: 250px; /* Giới hạn chiều cao */
+        object-fit: cover;
+        border-radius: 20px;
+    }
     </style>
 </head>
 
@@ -78,7 +96,18 @@ if (isset($_SESSION['order'])) {
         </div>
         <a class="link-to" style="" href="<?php echo SITEURL; ?>categories.php">Xem thêm danh mục </a>
     </section>
-
+    <section class="banners-section">
+    <div class="container">
+        <div class="banners-grid">
+            <div class="banner-item">
+                <img src="<?php echo SITEURL; ?>images/banner1.png" alt="Banner 1" class="banner-image-2">
+            </div>
+            <div class="banner-item">
+                <img src="<?php echo SITEURL; ?>images/banner2.png" alt="Banner 2" class="banner-image-2">
+            </div>
+        </div>
+    </div>
+</section>
     <!-- Món ăn nổi bật -->
     <section class="food-menu-section">
         <div class="container">

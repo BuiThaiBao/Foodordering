@@ -1,17 +1,14 @@
 <?php
 include('partials-front/menu.php'); 
 
-// Lấy ID đơn hàng từ URL
 $order_id = $_GET['order_id'];
 
-// Lấy thông tin chi tiết của đơn hàng
 $sql = "SELECT * FROM tbl_order WHERE id = $order_id AND u_id = {$_SESSION['u_id']}";
 $res = mysqli_query($conn, $sql);
 
 if ($res && mysqli_num_rows($res) > 0) {
     $order = mysqli_fetch_assoc($res);
 
-    // Lấy thông tin chi tiết của đơn hàng từ tbl_order_details
     $details_sql = "SELECT * FROM tbl_order_details WHERE order_id = $order_id";
     $details_res = mysqli_query($conn, $details_sql);
 } else {
@@ -29,7 +26,6 @@ if ($res && mysqli_num_rows($res) > 0) {
 <h2 title-cart>Chi tiết đơn hàng</h2>
 <table class="table">
     <tr>
-        
         <th>Tên sản phẩm</th>
         <th>Hình ảnh</th>
         <th>Size</th>
@@ -42,7 +38,6 @@ if ($res && mysqli_num_rows($res) > 0) {
 
 <?php
 while ($row = mysqli_fetch_assoc($details_res)) {
-    // Lấy thông tin sản phẩm từ tbl_food
     $food_sql = "SELECT title, price ,image_name FROM tbl_food WHERE id = {$row['food_id']}";
     $food_res = mysqli_query($conn, $food_sql);
     $food = mysqli_fetch_assoc($food_res);
@@ -60,7 +55,7 @@ while ($row = mysqli_fetch_assoc($details_res)) {
         <td>
         <?php if ($row['status'] == 0): ?>
             <a href="user_comment.php?food_id=<?= $row['food_id'] ?>" class="btn btn-primary">Đánh giá </a>
-            <?php endif; ?>
+        <?php endif; ?>
         </td>
     </tr>
 <?php
@@ -69,7 +64,7 @@ while ($row = mysqli_fetch_assoc($details_res)) {
 
 </table>
 </div>
-<span style="padding-left:44%">
+<span style="padding-left:42%">
 <a href="myorders.php" class="btn btn-primary" style="padding-top: 15px;" >Quay lại danh sách đơn hàng</a></span>
 <style>
     .table tr td {
@@ -80,7 +75,7 @@ while ($row = mysqli_fetch_assoc($details_res)) {
     padding-top: 10px;
     align-items: center;
 }
-        .cart-container {
+.cart-container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
@@ -104,7 +99,6 @@ h2 {
     background-color: #fff;
 }
 
-/* Table header styling */
 .table th {
     background-color: #428b16;
     color: white;
@@ -155,36 +149,36 @@ h2 {
     transition: background-color 0.3s ease;
 }
 .breadcrumb {
-        padding: 10px 20px 0 ;
-        font-size: 14px;
-        border-radius: 5px;
-    }
-
-    .breadcrumb a {
-        padding-left: 10px;
-        text-decoration: none;
-        color:black;
-        padding-right: 10px;
-
-    }
-
-    .breadcrumb a:hover {
-        text-decoration: underline;
-    }
-
-    .breadcrumb span {
-        padding-left: 10px;
-        color: black;
-        font-size: 14px;
-        font-weight:bolder;
-    }
-    .divider {
-  border: none;
-  border-top: 1px solid #ccc;
-  margin: 0;
+    padding: 10px 20px 0 ;
+    font-size: 14px;
+    border-radius: 5px;
 }
-.title-cart{
-    
+
+.breadcrumb a {
+    padding-left: 10px;
+    text-decoration: none;
+    color:black;
+    padding-right: 10px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    padding-left: 10px;
+    color: black;
+    font-size: 14px;
+    font-weight:bolder;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 0;
+}
+
+.title-cart {
     font-size: 2em;
     font-weight: bold;
     color: #333;

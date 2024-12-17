@@ -18,21 +18,18 @@
 
 
         if ($res == true) {
-            // Check whether the data is available or not
-            $count = mysqli_num_rows($res);
-            //Check whether we have user data or not
-            if ($count == 1) {
-                // Get the Details
-                //echo "User Available";
-                $row = mysqli_fetch_assoc($res);
 
+            $count = mysqli_num_rows($res);
+
+            if ($count == 1) {
+
+                $row = mysqli_fetch_assoc($res);
                 $full_name = $row['customer_name'];
                 $username = $row['username'];
                 $customer_email = $row['customer_email'];
                 $customer_contact = $row['customer_contact'];
                 $customer_address = $row['customer_address'];
             } else {
-                //Redirect to Manage User PAge
                 header('location:' . SITEURL . 'admin/manage-users.php');
             }
         }
@@ -90,10 +87,8 @@
 
 <?php
 
-//Check whether the Submit Button is Clicked or not
+
 if (isset($_POST['submit'])) {
-    //echo "Button CLicked";
-    //Get all the values from form to update
     $id = $_POST['id'];
     $full_name = $_POST['customer_name'];
     $username = $_POST['username'];
@@ -101,27 +96,17 @@ if (isset($_POST['submit'])) {
     $customer_contact = $_POST['customer_contact'];
     $customer_address = $_POST['customer_address'];
 
-
-    //Create a SQL Query to Update user
     $sql = "UPDATE users SET
         customer_name = '$full_name',
         username = '$username',customer_email = '$customer_email', customer_contact = ' $customer_contact',
         customer_address ='$customer_address'
         WHERE id='$id' ";
-
-    //Execute the Query
     $res = mysqli_query($conn, $sql);
-
-
     if ($res == true) {
-
         $_SESSION['update'] = "<div class='success'>User Updated Successfully.</div>";
-
         header('location:' . SITEURL . 'admin/manage_user.php');
     } else {
-        //Failed to Update user
         $_SESSION['update'] = "<div class='error'>Failed to Update Admin.</div>";
-        //Redirect to Manage user Page
         header('location:' . SITEURL . 'admin/manage_update.php');
     }
 }

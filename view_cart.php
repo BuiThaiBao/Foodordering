@@ -2,6 +2,140 @@
 include('partials-front/menu.php');
 ?>
 <html>
+
+
+<div class="breadcrumb">
+    <a href="index.php">Trang chủ</a> > <span>Giỏ hàng</span>
+</div>
+<hr class="divider">
+<form action="payment.php" method="post">
+    
+    <div class="cart-container">
+    <h2 class="title-cart">Giỏ hàng</h2>
+        <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) { ?>
+            <table class='table'>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Hình ảnh</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Size</th>
+                    <th>Tổng</th>
+                    <th>Ghi chú</th>
+                    <th>Thao tác</th>
+                </tr>
+
+                <?php $total_price = 0;
+                foreach ($_SESSION['cart'] as $food_id => $details) {
+                    if (!is_numeric($food_id)) continue;
+                    $stmt = $conn->prepare("SELECT * FROM tbl_food WHERE id = ?");
+                    $stmt->bind_param("i", $food_id);
+                    $stmt->execute();
+                    $res = $stmt->get_result();
+
+                    if ($product = $res->fetch_assoc()) {
+                        $title = $product['title'];
+                        $image_name = $product['image_name'];
+                        $price = $product['price'];
+                        $quantity = $details['quantity'];
+                        $size = isset($details['size']) ? $details['size'] : 'S';
+                        $item_total = $price * $quantity;
+
+                        if ($size == 'M') $item_total *= 1.10;
+                        elseif ($size == 'L') $item_total *= 1.20; ?>
+
+                        <tr>
+                            <td><?= $title ?></td>
+                            <td>
+                                <?php if ($image_name != "") { ?>
+                                    <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="food-image">
+                                <?php } else { ?>
+                                    <div class="error">Hình ảnh không có.</div>
+                                <?php } ?>
+                            </td>
+                            <td><?= number_format($price, 0, ',', '.') ?><u>đ</u></td>
+                            <td>
+                                <input type='number' name='quantity[<?= $food_id ?>]' value='<?= $quantity ?>' min='1' style='width: 50px;' onchange='updateQuantity(this, <?= $food_id ?>)' />
+                            </td>
+                            <td>
+                                <select name='size[<?= $food_id ?>]' onchange='updateSize(this, <?= $food_id ?>)'>
+                                    <option value='S' <?= ($size == 'S' ? 'selected' : '') ?>>S</option>
+                                    <option value='M' <?= ($size == 'M' ? 'selected' : '') ?>>M</option>
+                                    <option value='L' <?= ($size == 'L' ? 'selected' : '') ?>>L</option>
+                                </select>
+                            </td>
+                            <td id='item-total-<?= $food_id ?>'><?= number_format($item_total, 0, ',', '.') ?><u>đ</u></td>
+                            <td id="td-note">
+                                <textarea name="note" cols="30" rows="3" placeholder="Ghi chú cho cửa hàng"></textarea>
+                            </td>
+                            <td>
+                                <a href='remove_cart.php?food_id=<?= $food_id ?>' class='btn btn-danger'>Xóa</a>
+                            </td>
+                        </tr>
+
+                        <?php $total_price += $item_total; ?>
+                    <?php } ?>
+                    <?php $stmt->close(); ?>
+                <?php } ?>
+
+                <?php foreach ($_SESSION['cart'] as $food_id => $details) { ?>
+                    <input type="hidden" name="cart[<?= $food_id ?>][quantity]" value="<?= $details['quantity'] ?>" />
+                    <input type="hidden" name="cart[<?= $food_id ?>][size]" value="<?= (isset($details['size']) ? $details['size'] : 'S') ?>" />
+                <?php } ?>
+
+            </table>
+        <?php } else { ?>
+            <p class="notification">Giỏ hàng của bạn đang trống.</p>
+        <?php } ?>
+        <div class="total-container-wrapper">
+            <div class="total-container">
+                <div class="total-price">
+                    <span>Thành tiền: </span><p id="total-price"><?= @number_format($total_price, 0, ',', '.') ?><u>đ</u></p>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-success">Đặt hàng</button>
+                    <button type="button" class="btn btn-primary" onclick='location.reload();'>Cập nhật giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="total_price" value="<?= $total_price ?>" />
+    </div>
+</form>
+
+<script>
+    function updateQuantity(input, food_id) {
+        let quantity = input.value;
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_cart.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + " VND";
+                document.getElementById('total-price').innerText = response.total_price + " VND";
+            }
+        };
+        xhr.send("food_id=" + food_id + "&quantity=" + quantity);
+    }
+    function updateSize(select, food_id) {
+        let size = select.value;
+        let quantity = document.querySelector(`input[name="quantity[${food_id}]"]`).value;
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_cart.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + " VND";
+                document.getElementById('total-price').innerText = response.total_price + " VND";
+            }
+        };
+        xhr.send("food_id=" + food_id + "&quantity=" + quantity + "&size=" + size);
+    }
+</script>
 <style>
 .cart-container {
     width: 80%;
@@ -251,146 +385,6 @@ textarea {
 }
 
 </style>
-
-<div class="breadcrumb">
-    <a href="index.php">Trang chủ</a> > <span>Giỏ hàng</span>
-</div>
-<hr class="divider">
-<form action="payment.php" method="post">
-    
-    <div class="cart-container">
-    <h2 class="title-cart">Giỏ hàng</h2>
-        <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) { ?>
-            <table class='table'>
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Hình ảnh</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th>Size</th>
-                    <th>Tổng</th>
-                    <th>Ghi chú</th>
-                    <th>Thao tác</th>
-                </tr>
-
-                <?php $total_price = 0;
-                foreach ($_SESSION['cart'] as $food_id => $details) {
-                    if (!is_numeric($food_id)) continue;
-                    $stmt = $conn->prepare("SELECT * FROM tbl_food WHERE id = ?");
-                    $stmt->bind_param("i", $food_id);
-                    $stmt->execute();
-                    $res = $stmt->get_result();
-
-                    if ($product = $res->fetch_assoc()) {
-                        $title = $product['title'];
-                        $image_name = $product['image_name'];
-                        $price = $product['price'];
-                        $quantity = $details['quantity'];
-                        $size = isset($details['size']) ? $details['size'] : 'S';
-                        $item_total = $price * $quantity;
-
-                        if ($size == 'M') $item_total *= 1.10;
-                        elseif ($size == 'L') $item_total *= 1.20; ?>
-
-                        <tr>
-                            <td><?= $title ?></td>
-                            <td>
-                                <?php if ($image_name != "") { ?>
-                                    <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="food-image">
-                                <?php } else { ?>
-                                    <div class="error">Hình ảnh không có.</div>
-                                <?php } ?>
-                            </td>
-                            <td><?= number_format($price, 0, ',', '.') ?><u>đ</u></td>
-                            <td>
-                                <input type='number' name='quantity[<?= $food_id ?>]' value='<?= $quantity ?>' min='1' style='width: 50px;' onchange='updateQuantity(this, <?= $food_id ?>)' />
-                            </td>
-                            <td>
-                                <select name='size[<?= $food_id ?>]' onchange='updateSize(this, <?= $food_id ?>)'>
-                                    <option value='S' <?= ($size == 'S' ? 'selected' : '') ?>>S</option>
-                                    <option value='M' <?= ($size == 'M' ? 'selected' : '') ?>>M</option>
-                                    <option value='L' <?= ($size == 'L' ? 'selected' : '') ?>>L</option>
-                                </select>
-                            </td>
-                            <td id='item-total-<?= $food_id ?>'><?= number_format($item_total, 0, ',', '.') ?><u>đ</u></td>
-                            <td id="td-note">
-                                <textarea name="note" cols="30" rows="3" placeholder="Ghi chú cho cửa hàng"></textarea>
-                            </td>
-                            <td>
-                                <a href='remove_cart.php?food_id=<?= $food_id ?>' class='btn btn-danger'>Xóa</a>
-                            </td>
-                        </tr>
-
-                        <?php $total_price += $item_total; ?>
-                    <?php } ?>
-                    <?php $stmt->close(); ?>
-                <?php } ?>
-
-                <?php foreach ($_SESSION['cart'] as $food_id => $details) { ?>
-                    <input type="hidden" name="cart[<?= $food_id ?>][quantity]" value="<?= $details['quantity'] ?>" />
-                    <input type="hidden" name="cart[<?= $food_id ?>][size]" value="<?= (isset($details['size']) ? $details['size'] : 'S') ?>" />
-                <?php } ?>
-
-            </table>
-        <?php } else { ?>
-            <p class="notification">Giỏ hàng của bạn đang trống.</p>
-        <?php } ?>
-
-        <!-- Total Price and Buttons Section -->
-        <div class="total-container-wrapper">
-            <div class="total-container">
-                <div class="total-price">
-                    <span>Thành tiền: </span><p id="total-price"><?= @number_format($total_price, 0, ',', '.') ?><u>đ</u></p>
-                </div>
-                <div class="btn-container">
-                    <button type="submit" class="btn btn-success">Đặt hàng</button>
-                    <button type="button" class="btn btn-primary" onclick='location.reload();'>Cập nhật giỏ hàng</button>
-                </div>
-            </div>
-        </div>
-
-        <input type="hidden" name="total_price" value="<?= $total_price ?>" />
-    </div>
-</form>
-
-<script>
-    // Hàm cập nhật số lượng và tính lại tổng giá
-    function updateQuantity(input, food_id) {
-        let quantity = input.value;
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "update_cart.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let response = JSON.parse(xhr.responseText);
-                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + " VND";
-                document.getElementById('total-price').innerText = response.total_price + " VND";
-            }
-        };
-
-        xhr.send("food_id=" + food_id + "&quantity=" + quantity);
-    }
-
-    function updateSize(select, food_id) {
-        let size = select.value;
-        let quantity = document.querySelector(`input[name="quantity[${food_id}]"]`).value;
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "update_cart.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let response = JSON.parse(xhr.responseText);
-                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + " VND";
-                document.getElementById('total-price').innerText = response.total_price + " VND";
-            }
-        };
-
-        xhr.send("food_id=" + food_id + "&quantity=" + quantity + "&size=" + size);
-    }
-</script>
-
 </html>
 
 <?php

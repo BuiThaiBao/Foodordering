@@ -1,10 +1,7 @@
 <?php
 include('partials-front/menu.php');
-
-// Lấy ID người dùng hiện tại
 $u_id = $_SESSION['u_id'];
 $filter_status = isset($_GET['status']) ? $_GET['status'] : '';
-// Lấy thông tin đơn hàng của người dùng
 $sql = "SELECT * FROM tbl_order WHERE u_id = $u_id";
 if ($filter_status !== '') {
     $sql .= " AND status = $filter_status";
@@ -58,7 +55,6 @@ if (isset($_SESSION['error'])) {
                         'Đã hủy'));
             $payment_method_id = $row['payment_method'];
 
-            // Lấy tên phương thức thanh toán từ tbl_payment
             $payment_sql = "SELECT pm_name FROM tbl_payment WHERE pm_id = $payment_method_id";
             $payment_res = mysqli_query($conn, $payment_sql);
             $payment_row = mysqli_fetch_assoc($payment_res);

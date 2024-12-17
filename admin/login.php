@@ -2,11 +2,9 @@
 include('../config/constants.php');
 ?>
 <html>
-
 <head>
     <title>Đăng nhập - Hệ thống </title>
 </head>
-
 <body>
     <h1>Login</h1>
     <?php
@@ -21,7 +19,6 @@ include('../config/constants.php');
     ?>
     <br><br>
     <div>
-        <!-- Form dang nhap -->
         <form action="" method="POST">
             Username: <br>
             <input type="text" name="username" placeholder="Username"> <br><br>

@@ -5,19 +5,14 @@
         $food_id = $_POST['food_id'];
         $quantity = $_POST['quantity'];
         $size = $_POST['size'];
-
-        // Kiểm tra xem giỏ hàng đã tồn tại hay chưa
         if (isset($_SESSION['cart'][$food_id])) {
-            // Cập nhật số lượng
             $_SESSION['cart'][$food_id]['quantity'] = $quantity;
             $_SESSION['cart'][$food_id]['total_price'] = $_SESSION['cart'][$food_id]['price'] * $quantity;
             $_SESSION['cart'][$food_id]['size'] = $size;
         }
-
         header("Location: view_cart.php");
         exit();
     } else {
-        // Nếu không có food_id hoặc quantity, chuyển về trang giỏ hàng
         header("Location: view_cart.php");
         exit();
     }
@@ -38,8 +33,6 @@
         } elseif ($size == 'L') {
             $price *= 1.20;
         }
-
-
         $item_total = $price * $quantity;
         $response['item_total'] = number_format($item_total, 0, ',', '.');
 

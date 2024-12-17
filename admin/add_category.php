@@ -49,7 +49,6 @@
 
         <?php
         if (isset($_POST['submit'])) {
-            // Sanitize inputs
             $title = htmlspecialchars($_POST['title']);
             $featured = isset($_POST['featured']) ? $_POST['featured'] : "No";
             $active = isset($_POST['active']) ? $_POST['active'] : "No";
@@ -57,8 +56,6 @@
             $image_name = "";
             if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != "") {
                 $image_name = $_FILES['image']['name'];
-
-                // Validate file type
                 $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
                 $ext = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
 
@@ -67,7 +64,6 @@
                     $source_path = $_FILES['image']['tmp_name'];
                     $destination = "../images/category/" . $image_name;
 
-                    // Move file to the destination
                     if (!move_uploaded_file($source_path, $destination)) {
                         $_SESSION['upload'] = "<div class='error'>Lỗi tải ảnh lên</div>";
                         header('location:' . SITEURL . "admin/add_category.php");
@@ -80,7 +76,6 @@
                 }
             }
 
-            // Use prepared statements for the SQL query
             $sql = "INSERT INTO tbl_category (title, image_name, featured, active) VALUES (?, ?, ?, ?)";
             if ($stmt = mysqli_prepare($conn, $sql)) {
                 mysqli_stmt_bind_param($stmt, "ssss", $title, $image_name, $featured, $active);

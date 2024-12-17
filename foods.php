@@ -1,5 +1,4 @@
 <?php include('partials-front/menu.php'); ?>
-
 <section class="food-menu-section">
     <div class="container">
         <h2 class="section-title">Danh sách món ăn</h2>
@@ -12,7 +11,7 @@
             <?php
             $limit = 12; 
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; 
-            $offset = ($page - 1) * $limit; // Calculate offset
+            $offset = ($page - 1) * $limit; 
 
            
             $sql = "SELECT * FROM tbl_food WHERE active='Yes' LIMIT $limit OFFSET $offset";
@@ -31,7 +30,6 @@
                     $price = $row['price'];
                     $image_name = $row['image_name'];
             ?>
-                 
                         <div class="food-item">
                         <a href="<?php echo SITEURL; ?>food_detail_show.php?food_id=<?php echo $id; ?>" class="food-item-link">
                             <div class="food-image-wrapper">
@@ -81,5 +79,4 @@
         </div>
     </div>
 </section>
-
 <?php include('partials-front/footer.php'); ?>

@@ -1,8 +1,6 @@
 <?php
 include('partials-front/menu.php');
 $food_id = intval($_GET['food_id']);
-
-// Retrieve product details from the `tbl_food` table
 $sql = "SELECT * FROM tbl_food WHERE id = $food_id";
 $res = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($res);
@@ -14,15 +12,12 @@ if ($count == 1) {
     $description = $row['description'];
     $image_name = $row['image_name'];
 }
-
 $review_query = "SELECT tbl_review.*, users.username FROM tbl_review JOIN users ON tbl_review.u_id = users.id WHERE tbl_review.f_id = $food_id";
 $review_result = mysqli_query($conn, $review_query);
 ?>
-
 <html>
 <body>
     <div class="container mt-5">
-        <!-- Product Details Section -->
         <div class="row food-detail">
             <div class="col-md-6">
                 <div class="food-img">
@@ -47,8 +42,6 @@ $review_result = mysqli_query($conn, $review_query);
             </div>
 
         </div>
-
-        <!-- Reviews Section -->
         <div class="food-reviews">
             <h2>Bình luận</h2>
             <?php
@@ -100,14 +93,7 @@ $review_result = mysqli_query($conn, $review_query);
             }
             ?>
         </div>
-
-        <!-- Comment Form Section -->
-        
-
-
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

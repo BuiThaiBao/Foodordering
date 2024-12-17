@@ -15,7 +15,7 @@ $res = mysqli_query($conn, $sql);
 <body>
     <table>
         <tr>
-            <th>STT</th>
+           
             <th>Mã đơn hàng</th>
             <th>Tên khách hàng</th>
             <th>Ngày đặt</th>
@@ -26,7 +26,6 @@ $res = mysqli_query($conn, $sql);
             <th>Hủy</th>
         </tr>
         <?php
-        $stt = 1;
         while ($row = mysqli_fetch_array($res)) {
             $customer_name = $row['customer_name'];
             $order_date = $row['order_date'];
@@ -39,7 +38,6 @@ $res = mysqli_query($conn, $sql);
             $status = (($row['status'] == 1) ? 'Đang đặt hàng' : 'Đang giao hàng');
         ?>
         <tr>
-            <td><?php echo $stt++;?></td>
             <td><?php echo $row['id'];?></td>
             <td><?php echo $customer_name;?></td>
             <td><?php echo $order_date;?></td>

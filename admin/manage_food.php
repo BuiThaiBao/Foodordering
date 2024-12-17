@@ -6,7 +6,6 @@ include("partials/header.php");
 
 <head>
     <style>
-        /* Dropdown Lọc */
         .filter-section {
             margin-bottom: 20px;
         }
@@ -25,14 +24,12 @@ include("partials/header.php");
         <h1 class="text-center">Quản lý món ăn</h1>
         <br>
 
-        <!-- Phần lọc theo danh mục -->
         <div class="filter-section">
             <form method="GET" action="">
                 <label for="category">Lọc theo danh mục:</label>
                 <select name="category" id="category">
                     <option value="">Tất cả danh mục</option>
                     <?php
-                    // Lấy danh sách danh mục từ Cơ sở dữ liệu
                     $category_sql = "SELECT * FROM tbl_category";
                     $category_res = mysqli_query($conn, $category_sql);
 
@@ -75,7 +72,6 @@ include("partials/header.php");
             </thead>
             <tbody>
                 <?php
-                // Lấy danh mục lọc từ request
                 $filter_category = isset($_GET['category']) ? $_GET['category'] : "";
 
                 $sql = "
@@ -96,7 +92,6 @@ include("partials/header.php");
                     tbl_food.category_id = tbl_category.id
                 ";
 
-                // Thêm điều kiện lọc nếu có
                 if ($filter_category) {
                     $sql .= " WHERE tbl_food.category_id = '" . mysqli_real_escape_string($conn, $filter_category) . "'";
                 }

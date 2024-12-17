@@ -2,10 +2,8 @@
 $showAlert = false;
 $showError = false;
 $exists = false;
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('config/constants.php');
-
     $username = $_POST["username"];
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
@@ -29,19 +27,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $showAlert = true;
             }
         } else {
-            $showError = "Passwords do not match";
+            $showError = "Mật khẩu không trùng khớpkhớp";
         }
     }
 
     if ($num > 0) {
-        $exists = "Username not available";
+        $exists = "Tên đăng nhập đã tồn tạitại";
     }
 }
 ?>
-
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,10 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/style.css">
     <title>Signup</title>
 </head>
-
 <body>
-
-    <!-- Navbar Section -->
     <section class="navbar navbar-light bg-light">
         <div class="container">
             <div class="logo">
@@ -62,12 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </section>
-
-    <!-- Success/Error Alerts -->
     <?php
     if ($showAlert) {
         echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Your account is now created and you can <a href="login.php">login.</a> 
+            <strong>Success!</strong>Tài khoản đã được tạo thành công bạn có thể<a href="login.php">login.</a> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
                 <span aria-hidden="true">×</span> 
             </button> 
@@ -76,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($showError) {
         echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert"> 
-            <strong>Error!</strong> ' . $showError . ' 
+            <strong>Lỗi!</strong> ' . $showError . ' 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span> 
             </button> 
@@ -85,15 +76,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($exists) {
         echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error!</strong> ' . $exists . ' 
+            <strong>Lỗi!</strong> ' . $exists . ' 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
                 <span aria-hidden="true">×</span> 
             </button>
         </div> ';
     }
     ?>
-
-    <!-- Signup Form Section -->
     <div class="container my-5">
         <h2 class="text-center">Đăng kí ngay</h2>
         <form action="" method="post">

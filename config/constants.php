@@ -1,8 +1,8 @@
 <?php
 if (strpos($_SERVER['SCRIPT_NAME'], 'admin') !== false) {
-    session_name('admin_session'); // Đặt tên session riêng cho admin
+    session_name('admin_session'); 
 } else {
-    session_name('user_session'); // Đặt tên session riêng cho user
+    session_name('user_session'); 
 }
 session_start();
 define('SITEURL', 'http://localhost/Doanweb/');
