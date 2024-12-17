@@ -148,7 +148,7 @@ include('config/constants.php');
     </div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-            <a href="http://localhost/Doanweb/index.php" class="navbar-brand">
+            <a href="http://localhost/Foodordering-main/index.php" class="navbar-brand">
                 <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive" width="50px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

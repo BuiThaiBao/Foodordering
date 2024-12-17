@@ -2,137 +2,193 @@
 include('partials-front/menu.php');
 ?>
 <html>
-<style>
-    .cart-container {
-        width: 80%;
-        margin: 0 auto;
-        padding: 20px;
-        font-family: Arial, sans-serif;
-    }
+<style>.cart-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
 
-    /* Tiêu đề */
-    h2 {
-        text-align: left;
-        font-size: 1.8em;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 20px;
-    }
+h2 {
+    text-align: left;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
 
-    /* Bảng giỏ hàng */
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        font-size: 16px;
-        background-color: #fff;
-    }
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    background-color: #fff;
+}
 
-    .table th,
-    .table td {
-        padding: 12px;
-        text-align: center;
-        border: 1px solid #ebebeb;
-    }
+/* Table header styling */
+.table th {
+    background-color: #428b16;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ebebeb;
+    font-weight: bold;
+}
 
-    .table th {
-        background-color: #f5f5f5;
-        color: #333;
-        font-weight: bold;
-    }
+.table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ebebeb;
+}
 
-    /* Thông tin sản phẩm */
-    .table td img {
-        width: 60px;
-        height: auto;
-        border-radius: 8px;
-    }
+.table td img {
+    width: 60px;
+    height: auto;
+    border-radius: 8px;
+}
 
-    /* Giá và tổng tiền */
-    .table .food-price,
-    .table .food-total {
-        font-weight: 600;
-        color: #ff5722;
-    }
+/* Button colors */
+.btn-danger {
+    background-color: red;
+    color: white;
+}
 
-    /* Ô nhập số lượng */
-    input[type="number"] {
-        width: 50px;
-        padding: 5px;
-        font-size: 16px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        text-align: center;
-    }
+.btn-danger:hover {
+    background-color: #d9534f;
+}
 
-    /* Nút hành động */
-    .btn {
-        padding: 10px 20px;
-        text-align: center;
-        border: none;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        text-decoration: none;
-    }
+.btn {
+    padding: 5px 15px;
+    text-align: center;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
 
-    /* Nút cập nhật giỏ hàng */
-    .btn-primary {
-        background-color: #ff5722;
-        color: #fff;
-    }
+.btn-primary, .btn-success {
+    background-color: #51aa1b;
+    color: white;
+    height: 50px;
+}
 
-    .btn-primary:hover {
-        background-color: #e64a19;
-    }
+.btn-primary:hover, .btn-success:hover {
+    background-color: #4e9a1a;
+}
 
-    /* Nút thanh toán */
-    .btn-success {
-        background-color: #4caf50;
-        color: #fff;
-        margin-left: 10px;
-    }
+/* Adjusting the layout for buttons and total */
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* Added gap between buttons */
+}
 
-    .btn-success:hover {
-        background-color: #43a047;
-    }
+.total-container {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    justify-content: space-between; /* Align items in one row */
+    align-items: center;
+    width: 100%;
+}
 
-    /* Nút xóa sản phẩm */
-    .btn-danger {
-        background-color: #f44336;
-        color: #fff;
-    }
+/* Total Price styling - spread across the space */
+.total-container .total-price {
+    flex-grow: 1; /* Allow total price to take up remaining space */
+    text-align: left;
+}
 
-    .btn-danger:hover {
-        background-color: #d32f2f;
-    }
+/* Buttons container layout */
+.btn-container button {
+    width: 150px; /* Buttons take 150px width */
+}
 
-    /* Nút xóa toàn bộ giỏ hàng */
-    .btn-empty-cart {
-        background-color: #9e9e9e;
-        color: #fff;
-        margin-top: 15px;
-        display: inline-block;
-    }
+.btn-container button:hover {
+    background-color: #4e9a1b;
+}
 
-    .btn-empty-cart:hover {
-        background-color: #757575;
-    }
+/* Wrapper for the total price and buttons */
+.total-container-wrapper {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
 
-    /* Dòng tổng cộng */
-    .table tr:last-child td {
-        font-weight: bold;
-        font-size: 1.1em;
-        color: #333;
-    }
+/* Styling the total container */
+.total-container {
+    display: flex;
+    justify-content: space-between; /* Make it horizontal */
+    align-items: center;
+    gap: 10px; /* Add gap between the items */
+    width: 100%;
+}
 
-    /* Khoảng cách giữa các nút */
-    .btn-container {
-        text-align: right;
-        margin-top: 20px;
-    }
+.total-price p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Buttons container styling */
+.btn-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* Align buttons to the right */
+    width: 100%;
+}
+
+.btn-container button {
+    width: 170px;
+    font-size: 16px;
+}
+
+/* Input Fields Styling */
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Textarea for order notes */
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    resize: vertical;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Styling the individual buttons */
+.btn-container button:hover {
+    background-color: #4e9a1a;
+}
+
+
 </style>
 
 <h2>Giỏ hàng của bạn</h2>
@@ -173,17 +229,15 @@ include('partials-front/menu.php');
                         <tr>
                             <td><?= $title ?></td>
                             <td>
-
                                 <?php if ($image_name != "") { ?>
                                     <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="food-image">
                                 <?php } else { ?>
-                                    <div class="error">Image not available.</div>
+                                    <div class="error">Hình ảnh không có.</div>
                                 <?php } ?>
-
                             </td>
                             <td><?= number_format($price, 0, ',', '.') ?> VND</td>
                             <td>
-                                <input type='number' name='quantity[<?= $food_id ?>]' value='<?= $quantity ?>' min='1' style='width: 50px;' onchange='updateQuantity(this, <?= $food_id ?>)'>
+                                <input type='number' name='quantity[<?= $food_id ?>]' value='<?= $quantity ?>' min='1' style='width: 50px;' onchange='updateQuantity(this, <?= $food_id ?>)' />
                             </td>
                             <td>
                                 <select name='size[<?= $food_id ?>]' onchange='updateSize(this, <?= $food_id ?>)'>
@@ -207,50 +261,34 @@ include('partials-front/menu.php');
                 <?php } ?>
 
                 <?php foreach ($_SESSION['cart'] as $food_id => $details) { ?>
-                    <input type="hidden" name="cart[<?= $food_id ?>][quantity]" value="<?= $details['quantity'] ?>">
-                    <input type="hidden" name="cart[<?= $food_id ?>][size]" value="<?= (isset($details['size']) ? $details['size'] : 'S') ?>">
+                    <input type="hidden" name="cart[<?= $food_id ?>][quantity]" value="<?= $details['quantity'] ?>" />
+                    <input type="hidden" name="cart[<?= $food_id ?>][size]" value="<?= (isset($details['size']) ? $details['size'] : 'S') ?>" />
                 <?php } ?>
-
-                <tr>
-                    <td colspan='4'><strong>Tổng cộng</strong></td>
-                    <td id='total-price'><strong><?= number_format($total_price, 0, ',', '.') ?> VND</strong></td>
-                    <td></td>
-                </tr>
-
-
-                <input type="hidden" name="total_price" value="<?= $total_price ?>">
 
             </table>
         <?php } else { ?>
             <p>Giỏ hàng của bạn đang trống.</p>
         <?php } ?>
+
+        <!-- Total Price and Buttons Section -->
+        <div class="total-container-wrapper">
+            <div class="total-container">
+                <div class="total-price">
+                    <p>Tổng cộng: <strong id="total-price"><?= number_format($total_price, 0, ',', '.') ?> VND</strong></p>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-success">Đặt hàng</button>
+                    <button type="button" class="btn btn-primary" onclick='updateCart()'>Cập nhật giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="total_price" value="<?= $total_price ?>" />
     </div>
-    <input type="hidden">
-    <button type="submit" class="btn btn-success">Đặt hàng</button>
 </form>
-<button class='btn btn-primary' onclick='location.reload();'>Cập nhật giỏ hàng</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script>
-    // Hàm cập nhật số lượng và tính lại tổng giá
+    // Update cart quantities and sizes with AJAX
     function updateQuantity(input, food_id) {
         let quantity = input.value;
         let xhr = new XMLHttpRequest();
@@ -260,7 +298,7 @@ include('partials-front/menu.php');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
-                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + " VND";
+                document.getElementById(item-total-${food_id}).innerText = response.item_total + " VND";
                 document.getElementById('total-price').innerText = response.total_price + " VND";
             }
         };
@@ -270,7 +308,7 @@ include('partials-front/menu.php');
 
     function updateSize(select, food_id) {
         let size = select.value;
-        let quantity = document.querySelector(`input[name="quantity[${food_id}]"]`).value;
+        let quantity = document.querySelector(input[name="quantity[${food_id}]"]).value;
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "update_cart.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -278,12 +316,17 @@ include('partials-front/menu.php');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
-                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + " VND";
+                document.getElementById(item-total-${food_id}).innerText = response.item_total + " VND";
                 document.getElementById('total-price').innerText = response.total_price + " VND";
             }
         };
 
         xhr.send("food_id=" + food_id + "&quantity=" + quantity + "&size=" + size);
+    }
+
+    // Function to reload the page to apply updates
+    function updateCart() {
+        location.reload();
     }
 </script>
 
