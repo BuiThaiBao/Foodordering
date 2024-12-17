@@ -1,4 +1,131 @@
-<?php include('partials/header.php'); ?>
+<?php
+ob_start();
+include('partials/header.php'); ?>
+
+<style>
+/* General Styling for the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    width: 70%;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.wrapper {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+table input[type="text"],
+table input[type="file"],
+table input[type="radio"] {
+     font-size: 16px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Submit Button Styling */
+table input[type="submit"] {
+    background-color: #17a2b8;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+table input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Success/Failure Message Styling */
+.success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.error {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+/* Radio Button Group Styling */
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust space between the radio buttons */
+}
+
+input[type="radio"] {
+    margin-right: 2px; /* Reduce space between radio button and label */
+    width: auto;
+    height: auto;
+    vertical-align: middle; /* Align the radio button vertically with the text */
+}
+
+/* Label Styling */
+.radio-group label {
+    margin-right: 5px; /* Reduce space between radio button and label */
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        width: 90%;
+    }
+    table td {
+        padding: 8px;
+    }
+    table input[type="text"],
+    table input[type="file"],
+    table input[type="radio"],
+    table input[type="submit"] {
+        width: 100%;
+    }
+}
+
+</style>
 
 <div class="main-content">
     <div class="wrapper">
@@ -27,16 +154,20 @@
                 </tr>
                 <tr>
                     <td>Nổi bật:</td>
-                    <td>
-                        <input type="radio" name="featured" value="Yes"> Có
-                        <input type="radio" name="featured" value="No"> Không
+                    <td class="radio-group">
+                        <input type="radio" name="featured" value="Yes" id="featuredYes">
+                        <label for="featuredYes">Có</label>
+                        <input type="radio" name="featured" value="No" id="featuredNo">
+                        <label for="featuredNo">Không</label>
                     </td>
                 </tr>
                 <tr>
                     <td>Trạng thái: </td>
-                    <td>
-                        <input type="radio" name="active" value="Yes"> Có
-                        <input type="radio" name="active" value="No"> Không
+                    <td class="radio-group">
+                        <input type="radio" name="active" value="Yes" id="activeYes">
+                        <label for="activeYes">Có</label>
+                        <input type="radio" name="active" value="No" id="activeNo">
+                        <label for="activeNo">Không</label>
                     </td>
                 </tr>
                 <tr>

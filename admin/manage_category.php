@@ -6,132 +6,132 @@ include("partials/header.php");
 
 <head>
     <style>
-        /* General Page Styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f6f9;
-            margin: 0;
-            padding: 0;
-        }
+   /* General Page Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
 
-        .main-content {
-            background: #ffffff;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
-        }
+.main-content {
+    background: #ffffff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+}
 
-        /* Title */
-        h1 {
-            color: #343a40;
-            font-size: 28px;
-        }
+/* Title */
+h1 {
+    color: #343a40;
+    font-size: 28px;
+    text-align: center;
+}
 
-        /* Alerts */
-        .alert {
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
+/* Alerts */
+.alert {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
 
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-        }
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
 
-        .alert-warning {
-            color: #856404;
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-        }
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+}
 
-        .alert-info {
-            color: #0c5460;
-            background-color: #d1ecf1;
-            border: 1px solid #bee5eb;
-        }
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+}
 
-        .alert-danger {
-            color: #721c24;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-        }
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
 
-        /* Buttons */
-        .btn {
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
-        }
+/* Buttons */
+.btn {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
 
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-            border: none;
-        }
+.btn-primary {
+    background-color: #17a2b8; /* Set primary button color to #17a2b8 */
+    color: white;
+    border: none;
+}
 
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
+.btn-primary:hover {
+    background-color: #138496; /* Slightly darker shade of #17a2b8 */
+}
 
-        .btn-warning {
-            background-color: #ffc107;
-            color: #212529;
-        }
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
 
-        .btn-warning:hover {
-            background-color: #e0a800;
-        }
+.btn-warning:hover {
+    background-color: #e0a800;
+}
 
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
 
-        .btn-danger:hover {
-            background-color: #bd2130;
-        }
+.btn-danger:hover {
+    background-color: #bd2130;
+}
 
-        /* Table Styling */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
 
-        .table th,
-        .table td {
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
+.table th,
+.table td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
 
-        .table th {
-            background-color: #343a40;
-            color: white;
-        }
+.table th {
+    background-color: #17a2b8; /* Set table headers to color #17a2b8 */
+    color: white;
+}
 
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: #f2f2f2;
-        }
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
 
-        /* Images */
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-        }
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
     </style>
 </head>
 
 <body>
-
-
     <div class="main-content">
         <div class="wrapper">
             <h1 class="text-center">Quản lý danh mục</h1>

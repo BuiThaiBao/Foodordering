@@ -6,14 +6,158 @@ include("partials/header.php");
 
 <head>
     <style>
-        /* Dropdown Lọc */
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
+            background: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+        }
+
+        /* Title */
+        h1 {
+            color: #343a40;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        /* Filter Section */
         .filter-section {
             margin-bottom: 20px;
         }
+
         .filter-section select {
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+
+        /* Button Styling */
+        .btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #138496;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+
+        /* Table Styling */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #17a2b8; /* Header background color */
+            color: white; /* Text color */
+            font-size: 14px; /* Slightly smaller font */
+            font-weight: bold;
+            white-space: nowrap; /* Prevent wrapping of text */
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        /* Increase the width of the action column */
+        .table td:last-child,
+        .table th:last-child {
+            width: 200px; /* Adjust the width of the last column */
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+
+        /* Button container (in action column) */
+        .table td .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap; /* Allows buttons to wrap when necessary */
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+        }
+
+        .alert-info {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
@@ -22,7 +166,8 @@ include("partials/header.php");
 
 <div class="main-content">
     <div class="wrapper">
-        <h1 class="text-center">Quản lý món ăn</h1>
+        <h1>Quản lý món ăn</h1>
+
         <br>
 
         <!-- Phần lọc theo danh mục -->
@@ -60,7 +205,7 @@ include("partials/header.php");
         <br><br>
 
         <table class="table table-bordered table-striped">
-            <thead class="table-dark">
+            <thead>
                 <tr>
                     <th>STT</th>
                     <th>Tên món ăn</th>
@@ -135,7 +280,7 @@ include("partials/header.php");
                             </td>
                             <td><?php echo $featured; ?></td>
                             <td><?php echo $active; ?></td>
-                            <td>
+                            <td class="btn-container">
                                 <a href="<?php echo SITEURL; ?>admin/update_food.php?id=<?php echo $id; ?>" class="btn btn-warning btn-sm">Cập nhật</a>
                                 <a href="<?php echo SITEURL; ?>admin/delete_food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="btn btn-danger btn-sm" onclick="return confirmDelete();">Xóa</a>
                             </td>
@@ -156,9 +301,11 @@ include("partials/header.php");
         </script>
     </div>
 </div>
+
 </body>
 
 </html>
+
 <?php
 include("partials/footer.php");
 ?>

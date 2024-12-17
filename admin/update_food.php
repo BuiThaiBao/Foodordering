@@ -3,24 +3,152 @@ ob_start();
 include('partials/header.php');
 ?>
 
+<style>
+/* General Styling for the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    width: 70%; /* Make div smaller */
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+table.tbl-30 {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table.tbl-30 td {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+table.tbl-30 input[type="text"],
+table.tbl-30 input[type="number"],
+table.tbl-30 select,
+table.tbl-30 textarea {
+    font-size: 16px;
+    padding: 10px;
+    width: 100%; /* Full width for input fields */
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+table.tbl-30 input[type="file"] {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+table.tbl-30 img {
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+/* Success/Failure Message Styling */
+.success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.error {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+/* Radio Button Styling */
+table.tbl-30 input[type="radio"] {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        width: 90%; /* Make div smaller on mobile */
+    }
+
+    table.tbl-30 td {
+        padding: 8px;
+    }
+
+    table.tbl-30 input[type="text"],
+    table.tbl-30 input[type="number"],
+    table.tbl-30 select,
+    table.tbl-30 textarea,
+    table.tbl-30 input[type="file"],
+    table.tbl-30 input[type="submit"] {
+        width: 100%; /* Ensure all inputs/buttons are full width */
+    }
+}
+
+/* Style the button container for full width */
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.button-container input[type="submit"] {
+    width: 100%; /* Make button full width */
+    padding: 12px 20px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.button-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+</style>
+
 <div class="main-content">
     <div class="wrapper">
         <h1>Cập nhật món ăn</h1>
 
-
-
         <br><br>
 
         <?php
-        //check whether the id 
+        // Check whether the id 
         if (isset($_GET['id'])) {
-            //Get the id and all the details
+            // Get the id and all the details
             $id = $_GET['id'];
             $sql2 = "SELECT * FROM tbl_food WHERE id = $id";
             $res2 = mysqli_query($conn, $sql2);
 
             $row2 = mysqli_fetch_assoc($res2);
-
 
             $title = $row2['title'];
             $description = $row2['description'];
@@ -30,14 +158,9 @@ include('partials/header.php');
             $featured = $row2['featured'];
             $active = $row2['active'];
         } else {
-
-
             header('location:' . SITEURL . 'admin/manage_food.php');
         }
         ?>
-
-
-
 
         <form action="" method="POST" enctype="multipart/form-data">
             <table class="tbl-30">
@@ -67,9 +190,9 @@ include('partials/header.php');
                         ?>
                             <img src="<?php echo SITEURL; ?>images/food/<?php echo $old_image ?>" width="100px">
                         <?php
-                            //Display the image
+                            // Display the image
                         } else {
-                            //Display the message
+                            // Display the message
                             echo "<div class='error'>Không có ảnh</div>";
                         }
                         ?>
@@ -139,11 +262,15 @@ include('partials/header.php');
                     <td>
                         <input type="hidden" name="old_image" value="<?php echo $old_image; ?>">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
-                        <input type="submit" name="submit" value="Update Food" class="btn-primary">
                     </td>
                 </tr>
 
             </table>
+
+            <div class="button-container">
+                <input type="submit" name="submit" value="Update Food">
+            </div>
+
         </form>
 
         <?php
@@ -157,34 +284,31 @@ include('partials/header.php');
             $featured = $_POST["featured"];
             $active = $_POST["active"];
 
-
-
-
             if (isset($_FILES['image']['name'])) {
                 $image_name = $_FILES['image']['name'];
 
                 if ($image_name != "") {
-                    //Image available
+                    // Image available
 
-                    //Upload new image
+                    // Upload new image
                     $ext = end(explode('.', $image_name));
 
-                    //Rename the image with unique name
+                    // Rename the image with unique name
                     $image_name = "Food_" . rand(0000, 9999) . '.' . $ext;
 
                     $src_path = $_FILES['image']['tmp_name'];
 
                     $dest_path = "../images/food/" . $image_name;
 
-                    //Finally upload
+                    // Finally upload
                     $upload = move_uploaded_file($src_path, $dest_path);
 
-                    //Check whether the image 
+                    // Check whether the image 
                     if ($upload == false) {
                         $_SESSION['upload'] = "<div class='error'>Lỗi tải ảnh lên</div>";
-                        //Redirect to add Category
+                        // Redirect to add Category
                         header('location' . SITEURL . "admin/add_food.php");
-                        //stop the process
+                        // Stop the process
                         die();
                     }
 
@@ -195,9 +319,9 @@ include('partials/header.php');
 
                         if ($remove == false) {
                             $_SESSION['fail-remove'] = "<div class='error'>Lỗi xóa hình ảnh</div>";
-                            //Redirect to add Category
+                            // Redirect to add Category
                             header('location:' . SITEURL . "admin/manage_food.php");
-                            //stop the process
+                            // Stop the process
                             die();
                         }
                     }
@@ -207,7 +331,6 @@ include('partials/header.php');
             } else {
                 $image_name = $old_image;
             }
-
 
             $sql3 = "UPDATE tbl_food SET
             title = '$title',
@@ -233,6 +356,7 @@ include('partials/header.php');
         ?>
     </div>
 </div>
+
 <?php
 include('partials/footer.php');
 ?>

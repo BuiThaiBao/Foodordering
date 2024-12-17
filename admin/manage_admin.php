@@ -64,12 +64,12 @@ include('partials/header.php');
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #17a2b8; /* Updated background color */
             color: white;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: #117a8b; /* Adjust hover color */
         }
 
         .btn-info {
@@ -114,8 +114,7 @@ include('partials/header.php');
         }
 
         .table th {
-            background-color: #343a40;
-            color: white;
+            background-color: #17a2b8; /* Updated background color */
         }
 
         .table-striped tbody tr:nth-of-type(odd) {
@@ -125,7 +124,6 @@ include('partials/header.php');
 </head>
 
 <body>
-
 
     <div class="main-content">
         <div class="wrapper">
