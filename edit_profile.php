@@ -30,18 +30,18 @@ include('partials-front/menu.php');
             <table>
                 <tr>
                 <tr>
-                    <td>Tên người dùng</td>
+                    <td>Tên người dùng:</td>
                     <td>
                         <input type="text" name="customer_name" value="<?php echo $customer_name; ?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Email</td>
+                    <td>Email:</td>
                     <td><input type="text" name="customer_email" value="<?php echo $customer_email; ?>">
                     </td>
                 </tr>
                 <tr>
-                <td>Số điện thoại</td>
+                <td>Số điện thoại:</td>
                 <td><input type="text" name="customer_contact" value="<?php echo $customer_contact; ?>">
                     </td>
                 </tr>
@@ -50,13 +50,13 @@ include('partials-front/menu.php');
                 <td><input type="text" name="customer_address" value="<?php echo $customer_address; ?>">
                     </td>
                 </tr>
-                <td>Ảnh đại diệndiện</td>
+                <td>Ảnh đại diện: </td>
                 <td>
                 <img src="<?php echo SITEURL; ?>images/user/<?php echo $old_customer_image ?>" width="100px">
                 </td>
                 </tr>
                 <tr>
-                    <td>Thay ảnh đại diện</td>
+                    <td>Thay ảnh đại diện:</td>
                     <td>
                         <input type="file" name="image">
                     </td>
@@ -122,3 +122,115 @@ include('partials-front/menu.php');
 
     </div>
 </div>
+<style>
+    /* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body styles */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Container styles */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Header section */
+h1 {
+    text-align: center;
+    color: #58B747;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+
+
+/* Form table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+td {
+    padding: 10px;
+  
+}
+
+/* Input styles */
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    position:relative;
+    right:400px
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+    border-color: #58B747;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #58B747;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #45a030;
+}
+
+/* Success & Error messages */
+.success {
+    color: #28a745;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.error {
+    color: #dc3545;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* Image display styles */
+img {
+    border-radius: 4px;
+    margin: 10px 0;
+    position:relative;
+    right:400px
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    table td,
+    input[type="text"],
+    input[type="file"] {
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+}
+
+</style>

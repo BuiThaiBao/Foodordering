@@ -21,7 +21,7 @@ if (isset($_SESSION['order'])) {
             width: 100%;
             max-height: 100%;
             object-fit: cover;
-            border-radius: 10px;
+            
         }
     </style>
 </head>
@@ -111,7 +111,7 @@ if (isset($_SESSION['order'])) {
                                 </div>
                                 <div class="food-details">
                                     <h4 class="food-title"><?php echo $title; ?></h4>
-                                    <p class="food-price"><?php echo $price; ?> VND</p>
+                                    <p class="food-price"><?php echo $price; ?><u>đ</u></p>
 
                                 </div>
                             </a>

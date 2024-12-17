@@ -68,16 +68,11 @@ if (isset($_GET['category_id'])) {
                             </div>
                             <div class="food-details">
                                 <h4 class="food-title"><?php echo $title; ?></h4>
-                                <p class="food-price"><?php echo $price; ?> VND</p>
+                                <p class="food-price"><?php echo $price; ?><u>đ</u></p>
                                 
                             </div>
                             </a>
-                            <form action="<?php echo SITEURL; ?>carts.php?food_id=<?php echo $id; ?>" method="POST" class="add-to-cart-form">
-                                    <input type="hidden" name="food_id" value="<?php echo $id; ?>">
-                                    <label for="quantity-<?php echo $id; ?>">Số lượng:</label>
-                                    <input type="number" name="quantity" id="quantity-<?php echo $id; ?>" value="1" min="1" class="quantity-input">
-                                    <button type="submit" class="btn btn-add-to-cart">Thêm vào giỏ</button>
-                                </form>
+                
                         </div>
             <?php
                 }

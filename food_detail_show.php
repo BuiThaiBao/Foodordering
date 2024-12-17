@@ -35,7 +35,7 @@ $review_result = mysqli_query($conn, $review_query);
             </div>
             <div class="col-md-6 food-info">
                 <h1><?php echo $title; ?></h1>
-                <p class="price"><?php echo $price ?> VND</p>
+                <p class="price"><?php echo $price ?><u>đ</u></p>
                 <p class="description"><?php echo $description ?></p>
                 <br><br><br><br>
                 <form action="<?php echo SITEURL; ?>carts.php?food_id=<?php echo $id; ?>" method="POST" class="add-to-cart-form">
@@ -86,7 +86,7 @@ $review_result = mysqli_query($conn, $review_query);
                             echo "";
                         } else {
                         ?>
-                            <img src="<?php echo SITEURL; ?>images/reviews/<?php echo $image_name; ?>" width="150px" class="img-thumbnail">
+                            <img src="<?php echo SITEURL; ?>images/reviews/<?php echo $image_name; ?>" width="200px" height="400px" class="img-thumbnail">
                         <?php
                         }
                         ?>
@@ -114,5 +114,9 @@ $review_result = mysqli_query($conn, $review_query);
 </body>
 
 </html>
-
+<style>
+    .price{
+        color:#58B747 ;
+    }
+</style>
 <?php include 'partials-front/footer.php'; ?>
