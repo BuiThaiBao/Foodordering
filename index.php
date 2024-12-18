@@ -12,36 +12,7 @@ if (isset($_SESSION['order'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Order</title>
-    <style>
-         .banner-section {
-            text-align: center;
-            margin-bottom: 0px;
-        }
-        .banner-image {
-            width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-            
-        }
-        .banners-grid {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px; /* Khoảng cách giữa hai banner */
-        align-items: center;
-    }
 
-    /* Hiển thị từng banner */
-    .banner-item {
-        flex: 1; /* Chỉ định mỗi banner chiếm một nửa khoảng không gian */
-    }
-    .banner-image-2 {
-        width: 100%;
-        height: auto;
-        max-height: 250px; /* Giới hạn chiều cao */
-        object-fit: cover;
-        border-radius: 20px;
-    }
-    </style>
 </head>
 
 <body>
@@ -160,4 +131,34 @@ if (isset($_SESSION['order'])) {
     </section>
 </body>
 </html>
+<style>
+         .banner-section {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+        .banner-image {
+            width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            
+        }
+        .banners-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px; /* Khoảng cách giữa hai banner */
+        align-items: center;
+    }
+
+    /* Hiển thị từng banner */
+    .banner-item {
+        flex: 1; /* Chỉ định mỗi banner chiếm một nửa khoảng không gian */
+    }
+    .banner-image-2 {
+        width: 100%;
+        height: auto;
+        max-height: 250px; /* Giới hạn chiều cao */
+        object-fit: cover;
+        border-radius: 20px;
+    }
+    </style>
 <?php include('partials-front/footer.php'); ?>
