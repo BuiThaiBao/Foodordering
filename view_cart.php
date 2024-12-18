@@ -69,7 +69,7 @@ include('partials-front/menu.php');
                                 <textarea name="note" cols="30" rows="3" placeholder="Ghi chú cho cửa hàng"></textarea>
                             </td>
                             <td>
-                                <a href='remove_cart.php?food_id=<?= $food_id ?>' class='btn btn-danger'>Xóa</a>
+                                <a href='remove_cart.php?food_id=<?= $food_id ?>' class='btn btn-danger' onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?');">Xóa</a>
                             </td>
                         </tr>
 
@@ -113,8 +113,8 @@ include('partials-front/menu.php');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
-                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + " VND";
-                document.getElementById('total-price').innerText = response.total_price + " VND";
+                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + "đ";
+                document.getElementById('total-price').innerText = response.total_price + " đ";
             }
         };
         xhr.send("food_id=" + food_id + "&quantity=" + quantity);
@@ -129,8 +129,8 @@ include('partials-front/menu.php');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
-                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + " VND";
-                document.getElementById('total-price').innerText = response.total_price + " VND";
+                document.getElementById(`item-total-${food_id}`).innerText = response.item_total + "đ";
+                document.getElementById('total-price').innerText = response.total_price + "đ";
             }
         };
         xhr.send("food_id=" + food_id + "&quantity=" + quantity + "&size=" + size);
