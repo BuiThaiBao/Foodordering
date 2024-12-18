@@ -10,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
         <a style="padding-left: 120px;" href="index.php">Trang chủ</a>><a href="view_cart.php">Giỏ hàng</a>><span>Thanh toán</span>
     </div>
     <hr class="divider">
-    <h2>Thông tin đặt hàng</h2>
+    <div class="cart-container">
+    <h2>Thông tin đơn hàng</h2>
 
     <table class="table">
         <tr>
@@ -55,11 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
                             <div class="error">Image not available.</div>
                         <?php } ?>
                     </td>
-                    <td><?= number_format($price, 0, ',', '.') ?> VND</td>
+                    <td><?= number_format($price, 0, ',', '.') ?><u>đ</u></td>
                     <td><?= htmlspecialchars($quantity) ?></td>
                     <td><?= htmlspecialchars($size) ?></td>
                     <td><?= htmlspecialchars($note) ?></td>
-                    <td><?= number_format($item_total, 0, ',', '.') ?> VND</td>
+                    <td><?= number_format($item_total, 0, ',', '.') ?><u>đ</u></td>
                 </tr>
         <?php
                 $grand_total += $item_total;
@@ -70,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
         <tr>
             <td colspan='4'><strong>Tổng cộng</strong></td>
             <td></td>
-            <td><strong><?= number_format($grand_total, 0, ',', '.') ?> VND</strong></td>
+            <td><strong><?= number_format($grand_total, 0, ',', '.') ?><u>đ</u></strong></td>
         </tr>
     </table>
     <form action="process_payment.php" method="post">
@@ -114,7 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
 } else {
 ?>
     <p>Không có thông tin giỏ hàng.</p>
-    <style>
+    </div>
+    
+<?php
+}
+include('partials-front/footer.php');
+?>
+<style>
         /* Tổng quan */
         h2 {
             color: #58B747;
@@ -257,7 +264,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
             margin: 0;
         }
     </style>
-<?php
-}
-include('partials-front/footer.php');
-?>
