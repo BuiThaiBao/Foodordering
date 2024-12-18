@@ -1,8 +1,6 @@
 <?php
 
 include('../config/constants.php');
-
-// Kiểm tra nếu ID tồn tại trong URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
 

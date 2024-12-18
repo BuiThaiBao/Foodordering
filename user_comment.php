@@ -6,12 +6,78 @@ if (isset($_GET['food_id']) && is_numeric($_GET['food_id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đánh giá</title>
-    <style>
+</head>
+<body>
+    <div class="comment-form mt-5">
+        <h2>Đánh giá</h2>
+        <form action="review_handler.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="food_id" value="<?php echo $food_id; ?>" />
+            <div class="form-group">
+                <textarea name="comment" id="comment" class="form-control" placeholder="Thêm đánh giá của bạn" required></textarea>
+            </div>
+            <div class="form-group">
+    <label for="rating">Rating: </label><br>
+    <input type="radio" id="star1" name="rating" value="1">
+    <label for="star1" class="star">&#9733;</label>
+
+    <input type="radio" id="star2" name="rating" value="2">
+    <label for="star2" class="star">&#9733;</label>
+
+    <input type="radio" id="star3" name="rating" value="3">
+    <label for="star3" class="star">&#9733;</label>
+
+    <input type="radio" id="star4" name="rating" value="4">
+    <label for="star4" class="star">&#9733;</label>
+
+    <input type="radio" id="star5" name="rating" value="5">
+    <label for="star5" class="star">&#9733;</label>
+</div>
+
+
+            <div class="form-group">
+                <label for="image">Thêm hình ảnh: </label>
+                <input type="file" name="image" class="form-control-file">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Đánh giá</button>
+        </form>
+    </div>
+</body>
+<script>
+    const stars = document.querySelectorAll('.star');
+    const form = document.querySelector('form');
+    function highlightStars(index) {
+        stars.forEach((star, i) => {
+            star.style.color = i <= index ? '#f39c12' : '#ccc';
+        });
+    }
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            highlightStars(index);
+        });
+    });
+    window.addEventListener('load', () => {
+        highlightStars(4); 
+        document.getElementById('star5').checked = true; 
+    });
+
+    
+    form.addEventListener('submit', function (e) {
+    
+        const imageInput = document.querySelector('input[name="image"]');
+        if (!imageInput.files || imageInput.files.length === 0) {
+            e.preventDefault(); 
+            alert('Bạn phải tải lên ít nhất một hình ảnh!');
+        }
+    });
+</script>
+
+
+<style>
         body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -97,75 +163,4 @@ input[type="radio"] {
 
 
     </style>
-</head>
-
-<body>
-    <div class="comment-form mt-5">
-        <h2>Đánh giá</h2>
-        <form action="review_handler.php" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="food_id" value="<?php echo $food_id; ?>" />
-            <div class="form-group">
-                <textarea name="comment" id="comment" class="form-control" placeholder="Thêm đánh giá của bạn" required></textarea>
-            </div>
-
-            <!-- Star Rating -->
-            <div class="form-group">
-    <label for="rating">Rating: </label><br>
-    <input type="radio" id="star1" name="rating" value="1">
-    <label for="star1" class="star">&#9733;</label>
-
-    <input type="radio" id="star2" name="rating" value="2">
-    <label for="star2" class="star">&#9733;</label>
-
-    <input type="radio" id="star3" name="rating" value="3">
-    <label for="star3" class="star">&#9733;</label>
-
-    <input type="radio" id="star4" name="rating" value="4">
-    <label for="star4" class="star">&#9733;</label>
-
-    <input type="radio" id="star5" name="rating" value="5">
-    <label for="star5" class="star">&#9733;</label>
-</div>
-
-
-            <div class="form-group">
-                <label for="image">Thêm hình ảnh: </label>
-                <input type="file" name="image" class="form-control-file">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Đánh giá</button>
-        </form>
-    </div>
-</body>
-<script>
-    const stars = document.querySelectorAll('.star');
-    const form = document.querySelector('form');
-    function highlightStars(index) {
-        stars.forEach((star, i) => {
-            star.style.color = i <= index ? '#f39c12' : '#ccc';
-        });
-    }
-    stars.forEach((star, index) => {
-        star.addEventListener('click', () => {
-            highlightStars(index);
-        });
-    });
-    window.addEventListener('load', () => {
-        highlightStars(4); 
-        document.getElementById('star5').checked = true; 
-    });
-
-    
-    form.addEventListener('submit', function (e) {
-    
-        const imageInput = document.querySelector('input[name="image"]');
-        if (!imageInput.files || imageInput.files.length === 0) {
-            e.preventDefault(); 
-            alert('Bạn phải tải lên ít nhất một hình ảnh!');
-        }
-    });
-</script>
-
-
-
 </html>

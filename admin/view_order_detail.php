@@ -1,7 +1,5 @@
 <?php
 include("partials/header.php");
-
-// Lấy ID đơn hàng từ URL
 $order_id = $_GET['order_id'];
 
 
@@ -13,7 +11,6 @@ $u_id = $row ['u_id'];
 if ($res && mysqli_num_rows($res) > 0) {
     $order = mysqli_fetch_assoc($res);
 
-    // Lấy thông tin chi tiết của đơn hàng từ tbl_order_details
     $details_sql = "SELECT * FROM tbl_order_details WHERE order_id = $order_id";
     $details_res = mysqli_query($conn, $details_sql);
 } else {
@@ -37,7 +34,6 @@ if ($res && mysqli_num_rows($res) > 0) {
 
 <?php
 while ($row = mysqli_fetch_assoc($details_res)) {
-    // Lấy thông tin sản phẩm từ tbl_food
     $food_sql = "SELECT title, price ,image_name FROM tbl_food WHERE id = {$row['food_id']}";
     $food_res = mysqli_query($conn, $food_sql);
     $food = mysqli_fetch_assoc($food_res);

@@ -1,11 +1,10 @@
 <?php
+include('partials-front/menu.php'); 
 $showAlert = false;
 $showError = false;
 $exists = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include('config/constants.php');
-
     $username = $_POST["username"];
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
@@ -14,34 +13,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $customer_contact = $_POST["customer_contact"];
     $customer_address = $_POST["customer_address"];
 
-    $sql = "SELECT * FROM users WHERE username='$username'";
-    $result = mysqli_query($conn, $sql);
-    $num = mysqli_num_rows($result);
+    if (!filter_var($customer_email, FILTER_VALIDATE_EMAIL)) {
+        $showError = "Địa chỉ email không hợp lệ.";
+    } else {
+        $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=? OR customer_email=?");
+        mysqli_stmt_bind_param($stmt, "ss", $username, $customer_email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $num = mysqli_num_rows($result);
 
-    if ($num == 0) {
-        if ($password == $cpassword && $exists == false) {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (username, password, customer_name, customer_image, customer_email, customer_contact, customer_address, created_at) 
-                    VALUES ('$username', '$hash', '$customer_name', 'avt_default.jpg', '$customer_email', '$customer_contact', '$customer_address', current_timestamp())";
-            $result = mysqli_query($conn, $sql);
+        if ($num == 0) {
+            // Nếu username và email chưa tồn tại
+            if ($password == $cpassword) {
+                $hash = password_hash($password, PASSWORD_DEFAULT);
 
-            if ($result) {
-                $showAlert = true;
+                // Thêm user mới
+                $stmt = mysqli_prepare($conn, 
+                    "INSERT INTO users (username, password, customer_name, customer_image, customer_email, customer_contact, customer_address, created_at) 
+                    VALUES (?, ?, ?, 'avt_default.jpg', ?, ?, ?, current_timestamp())"
+                );
+                mysqli_stmt_bind_param($stmt, "ssssss", $username, $hash, $customer_name, $customer_email, $customer_contact, $customer_address);
+                $result = mysqli_stmt_execute($stmt);
+
+                if ($result) {
+                    $showAlert = true;
+                } else {
+                    $showError = "Đã xảy ra lỗi khi tạo tài khoản.";
+                }
+            } else {
+                $showError = "Mật khẩu không trùng khớp.";
             }
         } else {
-            $showError = "Passwords do not match";
+            $exists = "Tên đăng nhập hoặc email đã tồn tại.";
         }
-    }
 
-    if ($num > 0) {
-        $exists = "Username not available";
+        mysqli_stmt_close($stmt);
     }
+    mysqli_close($conn);
 }
 ?>
 
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,25 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/style.css">
     <title>Signup</title>
 </head>
-
 <body>
-
-    <!-- Navbar Section -->
-    <section class="navbar navbar-light bg-light">
-        <div class="container">
-            <div class="logo">
-                <a href="index.php" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Success/Error Alerts -->
     <?php
     if ($showAlert) {
         echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Your account is now created and you can <a href="login.php">login.</a> 
+            Tài khoản đã được tạo thành công bạn có thể <a href="login.php">Đăng nhập</a> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
                 <span aria-hidden="true">×</span> 
             </button> 
@@ -76,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($showError) {
         echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert"> 
-            <strong>Error!</strong> ' . $showError . ' 
+            <strong>Lỗi!</strong> ' . $showError . ' 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span> 
             </button> 
@@ -85,59 +84,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($exists) {
         echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error!</strong> ' . $exists . ' 
+            <strong>Lỗi!</strong> ' . $exists . ' 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
                 <span aria-hidden="true">×</span> 
             </button>
         </div> ';
     }
     ?>
-
-    <!-- Signup Form Section -->
     <div class="container my-5">
         <h2 class="text-center">Đăng kí ngay</h2>
         <form action="" method="post">
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label for="username">Tên đăng nhập</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <input type="text" class="form-control form-control-2" id="username" name="username" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="customer_name">Họ và tên</label>
+                    <label class="col2" for="customer_name">Họ và tên</label>
                     <input type="text" class="form-control" name="customer_name" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label  for="password">Mật khẩu</label>
+                    <input type="password" class="form-control form-control-2" id="password" name="password" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="cpassword">Nhập lại mật khẩu</label>
-                    <input type="password" class="form-control" id="cpassword" name="cpassword" required>
+                    <label class="col2" for="cpassword">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control " id="cpassword" name="cpassword" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label for="customer_email">Email</label>
-                    <input type="email" class="form-control" name="customer_email" required>
+                    <input type="email" class="form-control form-control-2" name="customer_email" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="customer_contact">Số điện thoại</label>
-                    <input type="number" class="form-control" name="customer_contact" required>
+                    <label class="col2" for="customer_contact">Số điện thoại</label>
+                    <input type="number" class="form-control " name="customer_contact" required>
                 </div>
             </div>
 
             <div class="form-group mb-3">
                 <label for="customer_address">Địa chỉ</label>
-                <textarea class="form-control" name="customer_address" required></textarea>
+                <textarea class="form-control " name="customer_address" required></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary btn-block">Đăng kí</button>
         </form>
     </div>
+    <?php include('partials-front/footer.php'); ?>
+
 <style>
     /* General Reset */
 body {
@@ -200,7 +199,14 @@ h2.text-center {
     color: #58B747;
     font-weight: bold;
 }
-
+.form-control-2{
+    position: relative;
+    right:50px;
+}
+.col2{
+    position: relative;
+    left:60px;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .form-row .col-md-6 {
@@ -212,3 +218,4 @@ h2.text-center {
 </body>
 
 </html>
+

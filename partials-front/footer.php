@@ -28,13 +28,15 @@
 </div>
 <footer>
   <div class="footer-container">
-    <!-- Giới thiệu về công ty -->
     <div class="footer-about">
       <h3>Giới thiệu</h3>
-      <p>Công ty ABC chuyên cung cấp các sản phẩm chất lượng với dịch vụ tận tâm. Khám phá cửa hàng của chúng tôi để tìm sản phẩm phù hợp nhất với bạn!</p>
+      <p>Chào mừng bạn đến với Twelve Food – điểm đến tuyệt vời cho những tín đồ ẩm thực! Chúng tôi cung cấp các món ăn đa dạng, thơm ngon và hấp dẫn từ nhiều nền ẩm thực khác nhau, với mục tiêu mang đến trải nghiệm ẩm thực tuyệt vời nhất cho mọi khách hàng.
+
+Tại Twelve Food, bạn có thể dễ dàng lựa chọn từ hàng trăm món ăn hấp dẫn, đặt hàng nhanh chóng và tiện lợi ngay trên trang web của chúng tôi. Dù bạn yêu thích các món ăn truyền thống hay các món ăn mới lạ, Twelve Food đều có thể đáp ứng mọi khẩu vị của bạn.
+</p>
     </div>
 
-    <!-- Liên kết nhanh -->
+    
     <div class="footer-links">
       <h3>Hỗ trợ khách hàng</h3>
       <ul>
@@ -46,7 +48,7 @@
       </ul>
     </div>
 
-    <!-- Liên hệ thông tin -->
+
     <div class="footer-contact">
       <h3>Liên hệ</h3>
       <p><i class="fas fa-envelope"></i> Email: buithaibao2k4@gmail.com</p>
@@ -55,7 +57,6 @@
     </div>
 
 
-    <!-- Biểu tượng mạng xã hội -->
     <div class="footer-social">
       <h3>Mạng xã hội</h3>
       <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -69,7 +70,6 @@
     &copy; Bản quyền thuộc về BTB
   </div>
   <style>
-    /* Reset cơ bản */
     * {
       margin: 0;
       padding: 0;
@@ -78,7 +78,6 @@
     .block{
       display: flex;
     }
-    /* Footer chính */
     footer {
 
       color: #fff;
@@ -95,8 +94,6 @@
       flex-wrap: wrap;
       gap: 20px;
     }
-
-    /* Giới thiệu */
     .footer-about,
     .footer-links,
     .footer-contact,
@@ -106,7 +103,7 @@
       text-align: left;
     }
 
-    /* Header trong từng phần footer */
+   
     .footer-about h3,
     .footer-links h3,
     .footer-contact h3,
@@ -116,7 +113,6 @@
       color: black;
     }
 
-    /* Liên kết trong footer */
     .footer-links ul {
       list-style: none;
       padding: 0;
@@ -155,7 +151,7 @@
       color: #428B16;
     }
 
-    /* Footer Bottom */
+
     .footer-bottom {
       text-align: center;
       padding: 10px 0;
@@ -181,7 +177,7 @@
 
     .footer-social .social-icon i {
       font-size: 18px;
-      /* Điều chỉnh kích thước biểu tượng */
+    
     }
 
     p {
@@ -237,15 +233,12 @@
       align-items: center;
       color: #8F8F8F;
       gap: 8px;
-      /* Khoảng cách giữa biểu tượng và văn bản */
       font-size: 14px;
     }
 
     .footer-contact i {
       color: #8F8F8F;
-      /* Màu cho các biểu tượng */
       font-size: 18px;
-      /* Điều chỉnh kích thước biểu tượng */
     }
     input.form-control{
       border-radius: 50px !important;

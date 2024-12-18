@@ -1,27 +1,15 @@
 <?php include('partials-front/menu.php'); ?>
-
-<!-- Categories Section Starts Here -->
 <section class="categories-section">
     <div class="container">
         <h2 class="section-title">Danh mục sản phẩm </h2>
 
         <div class="categories-grid ">
             <?php
-            // Display all the categories that are active
-            // SQL Query
             $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
-
-            // Execute the Query
             $res = mysqli_query($conn, $sql);
-
-            // Count Rows
             $count = mysqli_num_rows($res);
-
-            // Check whether categories are available or not
             if ($count > 0) {
-                // Categories Available
                 while ($row = mysqli_fetch_assoc($res)) {
-                    // Get the Values
                     $id = $row['id'];
                     $title = $row['title'];
                     $image_name = $row['image_name'];
@@ -50,6 +38,4 @@
         <div class="clearfix"></div>
     </div>
 </section>
-<!-- Categories Section Ends Here -->
-
 <?php include('partials-front/footer.php'); ?>

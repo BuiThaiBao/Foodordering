@@ -2,131 +2,7 @@
 include('partials/header.php');
 ?>
 <html>
-
-<head>
-    <style>
-        /* General Page Layout */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        .main-content {
-            background-color: #ffffff;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
-        }
-
-        /* Title Styling */
-        h1 {
-            font-size: 28px;
-            color: #343a40;
-        }
-
-        /* Alerts */
-        .alert {
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-danger {
-            color: #721c24;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-        }
-
-        .alert-info {
-            color: #0c5460;
-            background-color: #d1ecf1;
-            border: 1px solid #bee5eb;
-        }
-
-        /* Buttons */
-        .btn {
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
-            margin-right: 5px;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-info {
-            background-color: #17a2b8;
-            color: white;
-        }
-
-        .btn-info:hover {
-            background-color: #117a8b;
-        }
-
-        .btn-warning {
-            background-color: #ffc107;
-            color: black;
-        }
-
-        .btn-warning:hover {
-            background-color: #e0a800;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #bd2130;
-        }
-
-        /* Table Styling */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .table th,
-        .table td {
-            text-align: center;
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-
-        .table th {
-            background-color: #343a40;
-            color: white;
-        }
-
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-
 <body>
-
-
     <div class="main-content">
         <div class="wrapper">
             <h1 class="text-center">Quản lý nhân viên</h1>
@@ -146,7 +22,6 @@ include('partials/header.php');
             }
             ?>
             <a href="add_admin.php" class="btn btn-primary mb-4">Thêm nhân viên</a>
-
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
@@ -208,8 +83,121 @@ include('partials/header.php');
         }
     </script>
 </body>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
 
+        .main-content {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #343a40;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            margin-right: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #117a8b;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </html>
+
 <?php
 include("partials/footer.php");
 ?>

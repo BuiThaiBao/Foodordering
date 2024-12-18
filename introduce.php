@@ -17,9 +17,6 @@
     <p>👉 <a href="index.php">[Đặt hàng ngay]</a> và để chúng tôi mang ẩm thực Việt Nam đến tận cửa nhà bạn.</p>
 </div>
 
-
-
-
 </section>
 <style>
     .divider {
@@ -27,7 +24,6 @@
   border-top: 1px solid #ccc;
   margin: 0;
 }
-    /* Thanh breadcrumb */
     .breadcrumb {
         padding: 10px 20px 0 ;
         font-size: 14px;

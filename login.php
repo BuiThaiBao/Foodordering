@@ -4,12 +4,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     exit;
 }
 include('config/constants.php');
-
-// Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
-
-// Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty(trim($_POST["username"]))) {
         $username_err = "Vui lòng nhập tên đăng nhập.";
@@ -72,31 +68,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span class="login100-form-title"> <a href="index.php" title="Logo">
                     <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive" width="50px">
                 </a>Đăng nhập</span>
-                    <!-- Hiển thị thông báo lỗi -->
                     <?php if (!empty($login_err)) : ?>
                         <div class="alert alert-danger text-center mb-4" style="color:red "><?= $login_err ?></div>
                     <?php endif; ?>
-
-                    <!-- Username Field -->
-                    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-                        <input class="input100 <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Vui lòng nhập tên đăng nhập">
+                        <input class="input100 <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" type="text" name="username" placeholder="Tên đăng nhập" value="<?php echo $username; ?>">
                     
                         <div style="color:red;padding: 10px 10px 20px 35px;"><?php echo $username_err; ?></div>
                     </div>
 
-                    <!-- Password Field -->
-                    <div class="wrap-input100 validate-input" data-validate="Please enter password">
-                        <input class="input100 <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Password">
-                        
+                   
+                    <div class="wrap-input100 validate-input" data-validate="Vui lòng nhập mật khẩu">
+                        <input class="input100 <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Mật khẩu">
                         <div style="color:red;padding: 10px 10px 20px 35px;  "><?php echo $password_err; ?></div>
                     </div>
-
                     <div class="text-right p-t-13 p-b-23">
                         <span class="txt1">Quên</span>
-                        <a href="#" class="txt2">Tài khoản / Mật khẩu</a>
+                        <a href="forget_password.php" class="txt2">Mật khẩu</a>
                     </div>
-
-                    <!-- Submit Button -->
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">Đăng nhập</button>
                     </div>
@@ -109,13 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <style>
-
-
-
-
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
-
 @font-face {
   font-family: Ubuntu-Regular;
   src: url('../fonts/ubuntu/Ubuntu-Regular.ttf'); 
@@ -3489,7 +3471,6 @@ iframe {
 	bottom: 0px;
 }
     </style>
-
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>

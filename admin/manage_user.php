@@ -1,11 +1,8 @@
 <?php include('partials/header.php'); ?>
 
-
-<!-- Main Content Section Starts -->
 <div class="main-content">
     <div class="wrapper">
         <h1>Quản lý user</h1>
-
         <br />
 
         <?php
@@ -38,10 +35,8 @@
             echo $_SESSION['change-pwd'];
             unset($_SESSION['change-pwd']);
         }
-
         ?>
         <br><br><br>
-
 
         <a href="add-users.php" class="btn-primary">Add User</a>
 
@@ -59,27 +54,16 @@
                 <th>Hành động</th>
             </tr>
 
-
             <?php
-
             $sql = "SELECT * FROM users";
-
             $res = mysqli_query($conn, $sql);
 
-
             if ($res == TRUE) {
-
                 $count = mysqli_num_rows($res);
-
                 $stt = 1;
 
-                //CHeck the num of rows
                 if ($count > 0) {
-                    //WE HAve data in database
                     while ($rows = mysqli_fetch_assoc($res)) {
-
-
-                        //Get individual DAta
                         $id = $rows['id'];
                         $full_name = $rows['customer_name'];
                         $username = $rows['username'];
@@ -87,7 +71,6 @@
                         $contact = $rows['customer_contact'];
                         $address = $rows['customer_address'];
                         $created = $rows['created_at'];
-                        //Display the Values in our Table
             ?>
 
                         <tr>
@@ -103,25 +86,18 @@
                             </td>
                             <td>
                                 <a href="<?php echo SITEURL; ?>admin/delete_user.php?id=<?php echo $id; ?>">Delete</a>
-
                             </td>
                         </tr>
 
             <?php
-
                     }
-                } else {
                 }
             }
-
             ?>
-
-
 
         </table>
 
     </div>
 </div>
-
 
 <?php include('partials/footer.php'); ?>

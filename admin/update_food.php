@@ -6,15 +6,9 @@ include('partials/header.php');
 <div class="main-content">
     <div class="wrapper">
         <h1>Cập nhật món ăn</h1>
-
-
-
         <br><br>
-
         <?php
-        //check whether the id 
         if (isset($_GET['id'])) {
-            //Get the id and all the details
             $id = $_GET['id'];
             $sql2 = "SELECT * FROM tbl_food WHERE id = $id";
             $res2 = mysqli_query($conn, $sql2);
@@ -30,15 +24,9 @@ include('partials/header.php');
             $featured = $row2['featured'];
             $active = $row2['active'];
         } else {
-
-
             header('location:' . SITEURL . 'admin/manage_food.php');
         }
         ?>
-
-
-
-
         <form action="" method="POST" enctype="multipart/form-data">
             <table class="tbl-30">
                 <tr>
@@ -67,9 +55,7 @@ include('partials/header.php');
                         ?>
                             <img src="<?php echo SITEURL; ?>images/food/<?php echo $old_image ?>" width="100px">
                         <?php
-                            //Display the image
                         } else {
-                            //Display the message
                             echo "<div class='error'>Không có ảnh</div>";
                         }
                         ?>
@@ -111,7 +97,6 @@ include('partials/header.php');
                             ?>
                         </select>
                     </td>
-
                 </tr>
                 <tr>
                     <td>Featured:</td>
@@ -156,48 +141,32 @@ include('partials/header.php');
             $category = $_POST["category"];
             $featured = $_POST["featured"];
             $active = $_POST["active"];
-
-
-
-
             if (isset($_FILES['image']['name'])) {
                 $image_name = $_FILES['image']['name'];
-
                 if ($image_name != "") {
-                    //Image available
-
-                    //Upload new image
                     $ext = end(explode('.', $image_name));
 
-                    //Rename the image with unique name
+
                     $image_name = "Food_" . rand(0000, 9999) . '.' . $ext;
 
                     $src_path = $_FILES['image']['tmp_name'];
 
                     $dest_path = "../images/food/" . $image_name;
 
-                    //Finally upload
                     $upload = move_uploaded_file($src_path, $dest_path);
 
-                    //Check whether the image 
                     if ($upload == false) {
                         $_SESSION['upload'] = "<div class='error'>Lỗi tải ảnh lên</div>";
-                        //Redirect to add Category
                         header('location' . SITEURL . "admin/add_food.php");
-                        //stop the process
                         die();
                     }
-
                     if ($old_image != "") {
 
                         $remove_path = "../images/food/" . $old_image;
                         $remove = unlink($remove_path);
-
                         if ($remove == false) {
                             $_SESSION['fail-remove'] = "<div class='error'>Lỗi xóa hình ảnh</div>";
-                            //Redirect to add Category
                             header('location:' . SITEURL . "admin/manage_food.php");
-                            //stop the process
                             die();
                         }
                     }
@@ -207,8 +176,6 @@ include('partials/header.php');
             } else {
                 $image_name = $old_image;
             }
-
-
             $sql3 = "UPDATE tbl_food SET
             title = '$title',
             description = '$description',

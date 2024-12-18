@@ -5,9 +5,6 @@
      
     </head>
 <body>
-    
-
-<!-- fOOD sEARCH Section Starts Here -->
 <section class="food-search text-center">
     <div class="container">
         <?php
@@ -15,11 +12,6 @@
         ?>
     </div>
 </section>
-<!-- fOOD sEARCH Section Ends Here -->
-
-
-
-<!-- fOOD MEnu Section Starts Here -->
 <section class="food-menu-section">
     <div class="container">
         <h2 class="section-title">Danh sách món ăn</h2>
@@ -32,9 +24,7 @@
             <?php
             $limit = 12; 
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; 
-            $offset = ($page - 1) * $limit; // Calculate offset
-
-           
+            $offset = ($page - 1) * $limit;
             $sql ="SELECT * FROM tbl_food WHERE title LIKE '%$search%' OR description LIKE '%$search%' LIMIT $limit OFFSET $offset";
 
             $res = mysqli_query($conn, $sql);
@@ -51,7 +41,6 @@
                     $price = $row['price'];
                     $image_name = $row['image_name'];
             ?>
-                 
                         <div class="food-item">
                         <a href="<?php echo SITEURL; ?>food_detail_show.php?food_id=<?php echo $id; ?>" class="food-item-link">
                             <div class="food-image-wrapper">

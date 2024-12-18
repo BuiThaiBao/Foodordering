@@ -1,7 +1,6 @@
 <?php
-session_name('admin_session'); // Đặt tên session dành riêng cho user
+session_name('admin_session'); 
 session_start();
-
 $_SESSION = array();
 session_destroy();
 
@@ -12,8 +11,6 @@ if (ini_get("session.use_cookies")) {
         $params["secure"], $params["httponly"]
     );
 }
-
-// Chuyển hướng về trang đăng nhập
 header('location:'.'login.php');
 exit;
 ?>

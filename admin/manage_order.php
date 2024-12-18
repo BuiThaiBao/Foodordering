@@ -13,9 +13,14 @@ $res = mysqli_query($conn, $sql);
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION['cancel_order'] )) {
+        echo '<div class="alert alert-success">' . $_SESSION['cancel_order']  . '</div>';
+        unset($_SESSION['cancel_order'] );
+    }
+    ?>
     <table>
         <tr>
-            <th>STT</th>
             <th>Mã đơn hàng</th>
             <th>Tên khách hàng</th>
             <th>Ngày đặt</th>
@@ -26,7 +31,6 @@ $res = mysqli_query($conn, $sql);
             <th>Hủy</th>
         </tr>
         <?php
-        $stt = 1;
         while ($row = mysqli_fetch_array($res)) {
             $customer_name = $row['customer_name'];
             $order_date = $row['order_date'];
@@ -39,7 +43,6 @@ $res = mysqli_query($conn, $sql);
             $status = (($row['status'] == 1) ? 'Đang đặt hàng' : 'Đang giao hàng');
         ?>
         <tr>
-            <td><?php echo $stt++;?></td>
             <td><?php echo $row['id'];?></td>
             <td><?php echo $customer_name;?></td>
             <td><?php echo $order_date;?></td>
@@ -47,7 +50,7 @@ $res = mysqli_query($conn, $sql);
             <td><?php echo $payment_name;?></td>
             <td><?php echo $status;?></td>
             <td><a href="view_order_detail.php?order_id=<?php echo $row['id'];?>">Xem chi tiết</a></td>
-            <td><a href="cancel_order.php?id=<?php echo $row['id'];?>">Hủy</a></td>
+            <td><a href="cancel_order.php?order_id=<?php echo $row['id'];?>">Hủy</a></td>
         </tr>
         
         <?php

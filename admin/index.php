@@ -2,113 +2,12 @@
 include('partials/header.php');
 ?>
 <html>
-
-<head>
-    <style>
-        /* General Styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        .main-content {
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
-            max-width: 1200px;
-        }
-
-        .wrapper {
-            margin: auto;
-            padding: 10px;
-        }
-
-        /* Dashboard Header */
-        h1 {
-            color: #343a40;
-            margin-bottom: 20px;
-        }
-
-        /* Stats Grid */
-        .dashboard-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .stat-box {
-            flex: 1 1 calc(25% - 20px);
-            /* Four columns layout with spacing */
-            background-color: #17a2b8;
-            /* Bootstrap Info Color */
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .stat-box h1 {
-            font-size: 36px;
-            margin: 0;
-        }
-
-        .stat-box p {
-            font-size: 18px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        .stat-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .stat-box {
-                flex: 1 1 100%;
-                /* Full width on smaller screens */
-            }
-        }
-
-        .alert {
-            padding: 10px 20px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            color: #155724;
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        p {
-            color: white;
-        }
-    </style>
-</head>
-
 <body>
-
-
     <div class="main-content">
         <div class="wrapper">
             <h1 class="text-center">Dashboard</h1>
             <br>
             <br>
-            <?php
-           
-            ?>
             <div class="row dashboard-stats">
                 <div class="col-4 text-center stat-box">
                     <a href="manage_category.php">
@@ -151,6 +50,91 @@ include('partials/header.php');
 </body>
 
 </html>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .wrapper {
+            margin: auto;
+            padding: 10px;
+        }
+
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stat-box {
+            flex: 1 1 calc(25% - 20px);
+            background-color: #17a2b8;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-box h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .stat-box p {
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .stat-box {
+                flex: 1 1 100%;
+            }
+        }
+
+        .alert {
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        p {
+            color: white;
+        }
+    </style>
 <?php
 include('partials/footer.php');
 ?>

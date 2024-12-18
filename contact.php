@@ -4,7 +4,6 @@
 </div>
 <hr class="divider">
 <div class="contact-container">
-  <!-- Phần thông tin liên hệ -->
   <div class="contact-info">
     <div class="contact-item">
       <div class="icon-circle">
@@ -38,14 +37,7 @@
     referrerpolicy="no-referrer-when-downgrade">
   </iframe>
 </div>
-
 </div>
-
-
-
-
-
-
 <style>
     .breadcrumb {
 padding: 10px 20px 0 ;

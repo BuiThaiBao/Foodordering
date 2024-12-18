@@ -6,8 +6,6 @@ if (!isset($_GET['order_id']) || empty($_GET['order_id'])) {
     exit();
 }
 $order_id = $_GET['order_id'];
-
-
 try {
 
     $stmt = $conn->prepare("UPDATE tbl_order_details SET status = 3 WHERE order_id = ?");
