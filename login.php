@@ -71,20 +71,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php if (!empty($login_err)) : ?>
                         <div class="alert alert-danger text-center mb-4" style="color:red "><?= $login_err ?></div>
                     <?php endif; ?>
-                    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-                        <input class="input100 <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Vui lòng nhập tên đăng nhập">
+                        <input class="input100 <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" type="text" name="username" placeholder="Tên đăng nhập" value="<?php echo $username; ?>">
                     
                         <div style="color:red;padding: 10px 10px 20px 35px;"><?php echo $username_err; ?></div>
                     </div>
 
                    
-                    <div class="wrap-input100 validate-input" data-validate="Please enter password">
-                        <input class="input100 <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Password">
+                    <div class="wrap-input100 validate-input" data-validate="Vui lòng nhập mật khẩu">
+                        <input class="input100 <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Mật khẩu">
                         <div style="color:red;padding: 10px 10px 20px 35px;  "><?php echo $password_err; ?></div>
                     </div>
                     <div class="text-right p-t-13 p-b-23">
                         <span class="txt1">Quên</span>
-                        <a href="#" class="txt2">Tài khoản / Mật khẩu</a>
+                        <a href="forget_password.php" class="txt2">Mật khẩu</a>
                     </div>
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">Đăng nhập</button>

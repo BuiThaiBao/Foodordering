@@ -1,5 +1,4 @@
 <?php
-ob_start();
 include('partials-front/menu.php');// File kết nối DB
 $showAlert = false;
 $showError = false;
@@ -24,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $update_result = mysqli_query($conn, $update_sql);
 
                 if ($update_result) {
-                    $_SESSION['success_msg'] = "<h1> class='success'>Đổi mật khẩu thành công </h1>";
+                    $_SESSION['success_msg'] = "<div class='success'>Đổi mật khẩu thành công</div>";
                     header("Location: user_profile.php?u_id=" . $u_id);
                     exit;
                 } else {

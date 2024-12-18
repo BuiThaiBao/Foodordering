@@ -1,5 +1,4 @@
 <?php
-ob_start(); 
 include('partials-front/menu.php'); ?>
 
 <body>
@@ -17,21 +16,22 @@ include('partials-front/menu.php'); ?>
         $contact = $row['customer_contact'];
         $address = $row['customer_address'];
     }
+    ?>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <?php 
     if (isset($_SESSION['update'])) {
         echo '<div class="alert alert-success">' . $_SESSION['update'] . '</div>';
         unset($_SESSION['update']);
     }
-    if (isset($success_msg)) : ?>
-        <div style="color: green; font-weight: bold;">
-            <?php echo $success_msg; ?>
-        </div>
-    <?php endif; ?>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    if (isset($_SESSION['success_msg'] )) {
+        echo '<div class="alert alert-success">' . $_SESSION['success_msg']  . '</div>';
+        unset($_SESSION['success_msg'] );
+    }
+    ?>
     <div class="container">
         <div class="main-body">
-
             <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
                     <div class="card">
