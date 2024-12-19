@@ -40,7 +40,6 @@ include('partials-front/menu.php');
                         $quantity = $details['quantity'];
                         $size = isset($details['size']) ? $details['size'] : 'S';
                         $item_total = $price * $quantity;
-
                         if ($size == 'M') $item_total *= 1.10;
                         elseif ($size == 'L') $item_total *= 1.20; ?>
 

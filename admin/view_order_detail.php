@@ -211,7 +211,7 @@ if ($res && mysqli_num_rows($res) > 0) {
                 <td><?= htmlspecialchars($food['title']) ?></td>
                 <td><img src="<?= SITEURL . 'images/food/' . $food['image_name'] ?>" alt="<?= htmlspecialchars($food['title']) ?>" style="width: 200px; height: 200px;"></td>
                 <td><?= htmlspecialchars($row['size']) ?></td>
-                <td><?= htmlspecialchars($row['note']) ?></td>
+                <td><?= htmlspecialchars($row['note'])?></td>
                 <td><?= $row['quantity'] ?></td>
                 <td><?= number_format($food['price'], 0, ',', '.') ?> VNĐ</td>
                 <td><?= number_format($total_price, 0, ',', '.') ?> VNĐ</td>

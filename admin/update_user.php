@@ -121,7 +121,7 @@ if (isset($_POST['submit'])) {
 
         /* Main content styling */
         .main-content {
-            width: 70%;
+            width: 70%; /* Set the main content div width */
             margin: 30px auto;
             padding: 20px;
             background-color: #fff;
@@ -129,11 +129,87 @@ if (isset($_POST['submit'])) {
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
+        /* Table Styling */
+        table.tbl-30 {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table.tbl-30 td {
+            padding: 12px;
+            text-align: left;
+            font-size: 16px;
+            vertical-align: middle;
+        }
+
+        table.tbl-30 input[type="text"] {
+            font-size: 16px;
+            padding: 10px;
+            width: 100%; /* Full width for input fields */
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        table.tbl-30 input[type="submit"] {
+            background-color: #17a2b8;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%; /* Make button full width */
+            margin-top: 15px;
+        }
+
+        table.tbl-30 input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Success/Failure Message Styling */
+        .success {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        .error {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        /* Centering the "Update User" Heading */
         h1 {
             text-align: center;
             color: #333;
             font-size: 30px;
             margin-bottom: 20px;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                width: 90%; /* Make div smaller on mobile */
+            }
+
+            table.tbl-30 td {
+                padding: 8px;
+            }
+
+            table.tbl-30 input[type="text"],
+            table.tbl-30 input[type="submit"] {
+                width: 100%; /* Ensure all inputs/buttons are full width */
+            }
+        }
+
     </style>
 </html>

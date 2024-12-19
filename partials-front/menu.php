@@ -36,9 +36,6 @@ include('config/constants.php');
                 <li class="custom-nav">
                     <a href="logout.php" class="custom-nav-link-top" style="justify-content: flex-end;"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
                 </li>
-                <li class="custom-nav">
-                    <a href="/chat/user/index.php" class="custom-nav-link-top" style="justify-content: flex-end;"><i class="fas fa-sign-out-alt"></i>Chat</a>
-                </li>
             <?php endif; ?>
         </ul>
     </div>

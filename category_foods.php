@@ -21,7 +21,7 @@ if (isset($_GET['category_id'])) {
 
         <div class="food-menu-grid">
             <?php
-            $limit = 12;
+            $limit = 8;
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $offset = ($page - 1) * $limit;
             $sql2 = "SELECT * FROM tbl_food WHERE category_id=$category_id LIMIT $limit OFFSET $offset";

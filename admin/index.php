@@ -111,15 +111,11 @@ include('partials/header.php');
         }
     </style>
 </head>
-
 <body>
-
     <div class="main-content">
         <div class="wrapper">
             <h1 class="text-center">Dashboard</h1>
             <br><br>
-
-            <!-- Example success alert message -->
             <?php if (isset($alertMessage)) { ?>
                 <div class="alert">
                     <?php echo $alertMessage; ?>
@@ -131,7 +127,6 @@ include('partials/header.php');
                     unset($_SESSION['login'] );
                 }           
                 ?>
-            <!-- Dashboard Stats Section -->
             <div class="dashboard-stats">
                 <!-- Categories Stat Box -->
                 <div class="col-4 text-center stat-box">

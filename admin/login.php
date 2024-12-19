@@ -149,7 +149,6 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 
-    // SQL Query kiểm tra tài khoản
     $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
     $res = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($res);

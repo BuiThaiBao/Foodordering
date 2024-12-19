@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
     <form action="process_payment.php" method="post">
 
         <input type="hidden" name="cart" value='<?= json_encode($cart) ?>'>
-        <input type="hidden" name="note" value='<?= json_encode($note) ?>'>
+        <input type="hidden" name="note" value='<?= $note ?>'>
         <input type="hidden" name="total_price" value="<?= $grand_total ?>">
         <div class="form-group">
             <label for="payment_method">Phương thức thanh toán:</label>

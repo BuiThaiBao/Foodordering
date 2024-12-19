@@ -16,7 +16,6 @@ include('partials/header.php');
             unset($_SESSION['add']);
         }
         ?>
-
         <form action="" method="POST">
             <table>
                 <tr>
@@ -71,7 +70,7 @@ if (isset($_POST['submit'])) {
     $address = $_POST['address'];
     $contact = $_POST['contact'];
     if ($password === $cf_password) {
-        $hashed_password = md5($password);
+        $hashed_password = md5($password    );
         $sql = "INSERT INTO tbl_admin (full_name, username, password, email, address, contact) VALUES (?, ?, ?, ?, ?, ?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             mysqli_stmt_bind_param($stmt, "ssssss", $full_name, $username, $hashed_password, $email, $address, $contact);
