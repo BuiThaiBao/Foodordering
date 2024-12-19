@@ -18,7 +18,115 @@ body {
     padding: 20px;
 }
 
-/* Additional CSS left unchanged */
+/* Heading Styling */
+h1 {
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+table input[type="text"],
+table input[type="file"],
+table input[type="radio"] {
+    font-size: 16px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Submit Button Styling */
+table input[type="submit"] {
+    background-color: #17a2b8;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%; /* Nút chiếm toàn bộ chiều rộng của div */
+    margin-top: 15px;
+}
+
+table input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Success/Failure Message Styling */
+.success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.error {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+/* Radio Button Group Styling */
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 2px;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+}
+
+.radio-group label {
+    margin-right: 5px;
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        width: 90%;
+    }
+    table td {
+        padding: 8px;
+    }
+    table input[type="text"],
+    table input[type="file"],
+    table input[type="radio"],
+    table input[type="submit"] {
+        width: 100%;
+    }
+}
+
+/* New Div Style for Wrapping Bottom Part */
+.bottom-wrapper {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
 </style>
 
 <div class="main-content">

@@ -59,8 +59,8 @@ Tại Twelve Food, bạn có thể dễ dàng lựa chọn từ hàng trăm món
 
     <div class="footer-social">
       <h3>Mạng xã hội</h3>
-      <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/bao.buithai.167/" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/" class="social-icon"><i class="fab fa-instagram"></i></a>
       <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
       <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
     </div>

@@ -22,7 +22,7 @@
         } ?>
         <div class="food-menu-grid">
             <?php
-            $limit = 12; 
+            $limit = 8; 
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; 
             $offset = ($page - 1) * $limit;
             $sql ="SELECT * FROM tbl_food WHERE title LIKE '%$search%' OR description LIKE '%$search%' LIMIT $limit OFFSET $offset";
@@ -41,7 +41,7 @@
                     $price = $row['price'];
                     $image_name = $row['image_name'];
             ?>
-                        <div class="food-item">
+                        <div class="food-search-item food-item">
                         <a href="<?php echo SITEURL; ?>food_detail_show.php?food_id=<?php echo $id; ?>" class="food-item-link">
                             <div class="food-image-wrapper">
                                 <?php if ($image_name != "") { ?>
@@ -89,6 +89,14 @@
         </div>
     </div>
 </section>
+<style>
+    .food-search-item{
+            width: 255px;
+            height: 300px; 
+            object-fit: fill; 
+
+    }
+</style>
 </body>
 </html>
 <?php include('partials-front/footer.php'); ?>

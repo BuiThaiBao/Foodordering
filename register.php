@@ -21,20 +21,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $num = mysqli_num_rows($result);
-
         if ($num == 0) {
-            // Nếu username và email chưa tồn tại
             if ($password == $cpassword) {
                 $hash = password_hash($password, PASSWORD_DEFAULT);
-
-                // Thêm user mới
                 $stmt = mysqli_prepare($conn, 
                     "INSERT INTO users (username, password, customer_name, customer_image, customer_email, customer_contact, customer_address, created_at) 
                     VALUES (?, ?, ?, 'avt_default.jpg', ?, ?, ?, current_timestamp())"
                 );
                 mysqli_stmt_bind_param($stmt, "ssssss", $username, $hash, $customer_name, $customer_email, $customer_contact, $customer_address);
                 $result = mysqli_stmt_execute($stmt);
-
                 if ($result) {
                     $showAlert = true;
                 } else {

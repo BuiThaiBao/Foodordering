@@ -2,9 +2,90 @@
 include('partials/header.php');
 ?>
 <html>
-
 <head>
-    <style>
+</head>
+<body>
+    <div class="main-content">
+        <div class="wrapper">
+            <h1 class="text-center">Quản lý nhân viên</h1>
+            <br>
+            <?php
+            if (isset($_SESSION['add'])) {
+                echo '<div class="alert alert-success">' . $_SESSION['add'] . '</div>';
+                unset($_SESSION['add']);
+            }
+            if (isset($_SESSION['delete'])) {
+                echo '<div class="alert alert-danger">' . $_SESSION['delete'] . '</div>';
+                unset($_SESSION['delete']);
+            }
+            if (isset($_SESSION['change-pwd'])) {
+                echo '<div class="alert alert-info">' . $_SESSION['change-pwd'] . '</div>';
+                unset($_SESSION['change-pwd']);
+            }
+            ?>
+            <a href="add_admin.php" class="btn btn-primary mb-4">Thêm nhân viên</a>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên nhân viên</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>SĐT</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $sql = "SELECT * FROM tbl_admin";
+                    $res = mysqli_query($conn, $sql);
+                    $sn = 1;
+
+                    if ($res == true) {
+                        $count = mysqli_num_rows($res);
+                        if ($count > 0) {
+                            while ($row = mysqli_fetch_assoc($res)) {
+                                $id = $row['id'];
+                                $full_name = $row['full_name'];
+                                $username = $row['username'];
+                                $email = $row['email'];
+                                $address = $row['address'];
+                                $contact = $row['contact'];
+                                
+                    ?>
+                                <tr>
+                                    <td><?php echo $sn++; ?></td>
+                                    <td><?php echo $full_name; ?></td>
+                                    <td><?php echo $username; ?></td>
+                                    <td><?php echo $email; ?></td>
+                                    <td><?php echo $address; ?></td>
+                                    <td><?php echo $contact; ?></td>
+                                    <td>
+                                        <a href="<?php echo SITEURL; ?>/admin/update_password.php?id=<?php echo $id; ?>" class="btn btn-info btn-sm">Đổi mật khẩu</a>
+                                        <a href="<?php echo SITEURL; ?>/admin/update_admin.php?id=<?php echo $id; ?>" class="btn btn-warning btn-sm">Cập nhật</a>
+                                        <a href="<?php echo SITEURL; ?>/admin/delete_admin.php?id=<?php echo $id; ?>" class="btn btn-danger btn-sm" onclick="return confirmDelete();">Xóa</a>
+                                    </td>
+                                </tr>
+                    <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='7' class='text-center text-danger'>Chưa có nhân viên nào</td></tr>";
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function confirmDelete() {
+            return confirm("Bạn có chắc chắn muốn xóa nhân viên này không?");
+        }
+    </script>
+</body>
+<style>
         /* General Page Layout */
         body {
             font-family: Arial, sans-serif;
@@ -121,91 +202,6 @@ include('partials/header.php');
             background-color: #f2f2f2;
         }
     </style>
-</head>
-
-<body>
-
-    <div class="main-content">
-        <div class="wrapper">
-            <h1 class="text-center">Quản lý nhân viên</h1>
-            <br>
-            <?php
-            if (isset($_SESSION['add'])) {
-                echo '<div class="alert alert-success">' . $_SESSION['add'] . '</div>';
-                unset($_SESSION['add']);
-            }
-            if (isset($_SESSION['delete'])) {
-                echo '<div class="alert alert-danger">' . $_SESSION['delete'] . '</div>';
-                unset($_SESSION['delete']);
-            }
-            if (isset($_SESSION['change-pwd'])) {
-                echo '<div class="alert alert-info">' . $_SESSION['change-pwd'] . '</div>';
-                unset($_SESSION['change-pwd']);
-            }
-            ?>
-            <a href="add_admin.php" class="btn btn-primary mb-4">Thêm nhân viên</a>
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>STT</th>
-                        <th>Tên nhân viên</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Địa chỉ</th>
-                        <th>SĐT</th>
-                        <th>Chức năng</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $sql = "SELECT * FROM tbl_admin";
-                    $res = mysqli_query($conn, $sql);
-                    $sn = 1;
-
-                    if ($res == true) {
-                        $count = mysqli_num_rows($res);
-                        if ($count > 0) {
-                            while ($row = mysqli_fetch_assoc($res)) {
-                                $id = $row['id'];
-                                $full_name = $row['full_name'];
-                                $username = $row['username'];
-                                $email = $row['email'];
-                                $address = $row['address'];
-                                $contact = $row['contact'];
-                                
-                    ?>
-                                <tr>
-                                    <td><?php echo $sn++; ?></td>
-                                    <td><?php echo $full_name; ?></td>
-                                    <td><?php echo $username; ?></td>
-                                    <td><?php echo $email; ?></td>
-                                    <td><?php echo $address; ?></td>
-                                    <td><?php echo $contact; ?></td>
-                                    <td>
-                                        <a href="<?php echo SITEURL; ?>/admin/update_password.php?id=<?php echo $id; ?>" class="btn btn-info btn-sm">Đổi mật khẩu</a>
-                                        <a href="<?php echo SITEURL; ?>/admin/update_admin.php?id=<?php echo $id; ?>" class="btn btn-warning btn-sm">Cập nhật</a>
-                                        <a href="<?php echo SITEURL; ?>/admin/delete_admin.php?id=<?php echo $id; ?>" class="btn btn-danger btn-sm" onclick="return confirmDelete();">Xóa</a>
-                                    </td>
-                                </tr>
-                    <?php
-                            }
-                        } else {
-                            echo "<tr><td colspan='7' class='text-center text-danger'>Chưa có nhân viên nào</td></tr>";
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <script>
-        function confirmDelete() {
-            return confirm("Bạn có chắc chắn muốn xóa nhân viên này không?");
-        }
-    </script>
-</body>
-
 </html>
 <?php
 include("partials/footer.php");

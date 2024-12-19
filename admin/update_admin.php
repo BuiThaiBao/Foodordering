@@ -110,4 +110,72 @@ include('partials/footer.php');
         margin: 0;
         padding: 0;
     }
+
+    .main-content {
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #343a40;
+        text-align: center;
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    table tr td {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    table input {
+        padding: 8px;
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    /* Buttons */
+    input[type="submit"] {
+        background-color: #17a2b8;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #117a8b;
+    }
+
+    /* Alerts */
+    .success {
+        color: #155724;
+        background-color: #d4edda;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .error {
+        color: #721c24;
+        background-color: #f8d7da;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
 </style>

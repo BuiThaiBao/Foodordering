@@ -320,7 +320,7 @@ table.tbl-30 input[type="radio"] {
                 active = ?
                 WHERE id = ?
             ");
-            $stmt->bind_param("ssssiisi", $title, $description, $price, $image_name, $category, $featured, $active, $id);
+            $stmt->bind_param("ssssissi", $title, $description, $price, $image_name, $category, $featured, $active, $id);
         
             if ($stmt->execute()) {
                 $_SESSION['update'] = "<div class='success'>Cập nhật thành công</div>";

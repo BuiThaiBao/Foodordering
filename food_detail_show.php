@@ -24,7 +24,7 @@ $review_result = mysqli_query($conn, $review_query);
                     <?php if ($image_name == ""): ?>
                         <div class='alert alert-danger'>Image not Available.</div>
                     <?php else: ?>
-                        <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="img-fluid rounded">
+                        <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="food-img img-fluid rounded">
                     <?php endif; ?>
                 </div>
             </div>
@@ -103,6 +103,11 @@ $review_result = mysqli_query($conn, $review_query);
 <style>
     .price{
         color:#58B747 ;
+    }
+    .food-img {
+        width: 100%;
+            height: 400px; /* Có thể thay đổi chiều cao theo yêu cầu */
+            object-fit: fill; /* Dãn ảnh bất chấp chất lượng */
     }
 </style>
 <?php include 'partials-front/footer.php'; ?>

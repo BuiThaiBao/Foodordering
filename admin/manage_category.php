@@ -185,7 +185,6 @@ img {
                     $res = mysqli_query($conn, $sql);
                     $count = mysqli_num_rows($res);
                     $stt = 1;
-
                     if ($count > 0) {
                         while ($row = mysqli_fetch_assoc($res)) {
                             $id = $row['id'];
