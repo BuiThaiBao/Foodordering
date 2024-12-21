@@ -1,6 +1,10 @@
 <?php
 include("partials/header.php");
-$sql = "SELECT tbl_order.*, users.customer_name FROM tbl_order JOIN users ON tbl_order.u_id = users.id WHERE tbl_order.status IN (1, 2)";
+$filter_status = isset($_GET['status']) ? $_GET['status'] : '';
+$sql = "SELECT tbl_order.*, users.customer_name FROM tbl_order JOIN users ON tbl_order.u_id = users.id  ";
+if ($filter_status !== '') {
+    $sql .= " WHERE status = $filter_status";
+}
 $res = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -176,7 +180,17 @@ $res = mysqli_query($conn, $sql);
         }
         ?>
         <h1>Quản lý Đơn Hàng</h1>
-
+        <form method="GET" action=""  >
+    
+    <select name="status" id="status" >
+        <option value="">Tất cả</option>
+        <option value="1" <?= $filter_status === '1' ? 'selected' : '' ?>>Đang đặt hàng</option>
+        <option value="2" <?= $filter_status === '2' ? 'selected' : '' ?>>Đang giao hàng</option>
+        <option value="0" <?= $filter_status === '0' ? 'selected' : '' ?>>Giao hàng thành công</option>
+        <option value="3" <?= $filter_status === '3' ? 'selected' : '' ?>>Đã hủy</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+</form>
         
         <div class="table-wrapper">
             <table>

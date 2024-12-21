@@ -16,12 +16,11 @@ try {
     $stmt->bind_param('i', $order_id);
     $stmt->execute();
     $stmt->close();
-
     $_SESSION['success'] = "<div class='success'>Đã hủy đơn hàng thành công.</div>";
     header('Location: myorders.php');
     exit();
 } catch (Exception $e) {
     $_SESSION['error'] = "<div class='error'>Đã xảy ra lỗi: " . $e->getMessage() . "</div>";
-    header('Location: myorderss.php');
+    header('Location: myorders.php');
     exit();
 }

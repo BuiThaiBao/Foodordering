@@ -7,19 +7,23 @@ if ($filter_status !== '') {
     $sql .= " AND status = $filter_status";
 }
 $res = mysqli_query($conn, $sql);
-if (isset($_SESSION['success'])) {
-    echo $_SESSION['success'];
-    unset($_SESSION['success']);
-}
-if (isset($_SESSION['error'])) {
-    echo $_SESSION['error'];
-    unset($_SESSION['error']);
-}
+    
+
 ?>
 <div class="breadcrumb">
     <a href="index.php">Trang chủ</a> > <span>Đơn hàng</span>
 </div>
 <hr class="divider">
+<?php
+if (isset($_SESSION['success'])) {
+    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+    unset($_SESSION['success']);
+}
+if (isset($_SESSION['error'])) {
+    echo '<div class="alert alert-warning">' . $_SESSION['error'] . '</div>';
+    unset($_SESSION['error']);
+}
+?>
 
 <div class="cart-container">
 <div class="form-filter">
